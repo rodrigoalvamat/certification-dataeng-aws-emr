@@ -14,6 +14,7 @@ DNS="${aws_emr_cluster.emr_cluster.master_public_dns}"
 KEYPAIR="$HOME/.ssh/${var.ec2_key_pair}.pem"
 CLUSTER_ID="${aws_emr_cluster.emr_cluster.id}"
 [AWS]
+AWS_REGION=""
 AWS_ACCESS_KEY_ID=""
 AWS_SECRET_ACCESS_KEY=""
 EOT

@@ -1,0 +1,1 @@
+{"artist_id":"AR9Q9YC1187FB5609B","artist_latitude":null,"artist_location":"New Jersey","artist_longitude":null,"artist_name":"Quest_ Pup_ Kevo","duration":252.94322,"num_songs":1,"song_id":"SOFRDWL12A58A7CEF7","title":"Hit Da Scene","year":0}

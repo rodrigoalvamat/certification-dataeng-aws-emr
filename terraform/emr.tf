@@ -40,7 +40,7 @@ resource "aws_emr_cluster" "emr_cluster" {
 
     hadoop_jar_step {
       jar  = "command-runner.jar"
-      args = ["sudo", "-u", "emr-notebook", "/mnt/notebook-env/bin/pip", "install", "emr-notebooks-magics"]
+      args = ["sudo", "-u", "emr-notebook", "pip3", "install", "emr-notebooks-magics"]
     }
   }
 

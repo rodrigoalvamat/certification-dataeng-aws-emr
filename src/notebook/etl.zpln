@@ -1,154 +1,343 @@
 ﻿{
  "paragraphs": [
   {
-   "settings": {
-    "params": {},
-    "forms": {}
-   },
-   "apps": [],
-   "status": "READY",
    "text": "%md\n# Import Libraries",
-   "id": "",
-   "config": {}
-  },
-  {
    "user": "anonymous",
-   "config": {
-    "colWidth": 12,
-    "fontSize": 9,
-    "enabled": true,
-    "results": {},
-    "editorSetting": {
-     "language": "scala",
-     "editOnDblClick": false,
-     "completionKey": "TAB",
-     "completionSupport": true
-    },
-    "editorMode": "ace/mode/scala"
-   },
+   "dateUpdated": "2022-08-09T14:23:21+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "HTML",
+      "data": "<h1>Import Libraries</h1>\n"
+     }
+    ]
+   },
    "apps": [],
-   "jobName": "paragraph_1563110258183_1613653816",
-   "id": "20190714-161738_1950435706",
-   "dateCreated": "2019-07-14T16:17:38+0300",
-   "status": "READY",
-   "progressUpdateIntervalMs": 500,
-   "focus": true,
-   "$$hashKey": "object:394",
-   "text": "%pyspark\nfrom pyspark.sql import SparkSession"
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055001570_557769964",
+   "id": "paragraph_1660055001570_557769964",
+   "dateCreated": "2022-08-09T14:23:21+0000",
+   "dateStarted": "2022-08-09T14:23:21+0000",
+   "dateFinished": "2022-08-09T14:23:25+0000",
+   "status": "FINISHED"
   },
   {
+   "text": "%pyspark\nfrom pyspark.sql import SparkSession",
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:24+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
+   "results": {
+    "code": "SUCCESS",
+    "msg": []
+   },
    "apps": [],
-   "status": "READY",
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055003383_1649069",
+   "id": "paragraph_1660055003383_1649069",
+   "dateCreated": "2022-08-09T14:23:23+0000",
+   "dateStarted": "2022-08-09T14:23:24+0000",
+   "dateFinished": "2022-08-09T14:23:24+0000",
+   "status": "FINISHED"
+  },
+  {
    "text": "%md\n# Create Spark Session",
-   "id": "",
-   "config": {}
-  },
-  {
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:25+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "HTML",
+      "data": "<h1>Create Spark Session</h1>\n"
+     }
+    ]
+   },
    "apps": [],
-   "status": "READY",
-   "text": "%pyspark\nspark = SparkSession \\\n    .builder \\\n    .config(\"spark.jars.packages\", \"org.apache.hadoop:hadoop-aws:3.3.4\") \\\n    .getOrCreate()",
-   "id": "",
-   "config": {}
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055005053_1181700027",
+   "id": "paragraph_1660055005053_1181700027",
+   "dateCreated": "2022-08-09T14:23:25+0000",
+   "dateStarted": "2022-08-09T14:23:26+0000",
+   "dateFinished": "2022-08-09T14:23:26+0000",
+   "status": "FINISHED"
   },
   {
+   "text": "%pyspark\nspark = SparkSession \\\n    .builder \\\n    .appName('ETLZeppelin')\\\n    .config(\"spark.jars.packages\", \"org.apache.hadoop:hadoop-aws:3.3.4\") \\\n    .getOrCreate()",
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:27+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
+   "results": {
+    "code": "SUCCESS",
+    "msg": []
+   },
    "apps": [],
-   "status": "READY",
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055006792_141986549",
+   "id": "paragraph_1660055006792_141986549",
+   "dateCreated": "2022-08-09T14:23:26+0000",
+   "dateStarted": "2022-08-09T14:23:27+0000",
+   "dateFinished": "2022-08-09T14:23:27+0000",
+   "status": "FINISHED"
+  },
+  {
    "text": "%md\n# Reads Song Data",
-   "id": "",
-   "config": {}
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:29+0000",
+   "progress": 0.0,
+   "config": {
+    "tableHide": true
+   },
+   "settings": {
+    "params": {
+     "bdtMeta": {
+      "inlay": {
+       "collapsed": true
+      }
+     }
+    },
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "HTML",
+      "data": "<h1>Reads Song Data</h1>\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055008738_1089231526",
+   "id": "paragraph_1660055008738_1089231526",
+   "dateCreated": "2022-08-09T14:23:28+0000",
+   "dateStarted": "2022-08-09T14:23:29+0000",
+   "dateFinished": "2022-08-09T14:23:29+0000",
+   "status": "FINISHED"
   },
   {
+   "text": "%pyspark\nsong_data_path = \"s3a://udacity-dend/song_data/*/*/*/*.json\"\nsongs = spark.read.json(song_data_path)\nsongs.printSchema()",
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:31+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
-   "apps": [],
-   "status": "READY",
-   "text": "%pyspark\nsong_data_path = \"s3://udacity-dend/song_data\"\nsongs = spark.read.json(song_data_path)\nsongs.printSchema()",
-   "id": "",
-   "config": {}
-  },
-  {
-   "settings": {
-    "params": {},
-    "forms": {}
+   "results": {
+    "code": "ERROR",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "Traceback (most recent call last):\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 929, in _get_connection\n    connection = self.deque.pop()\nIndexError: pop from an empty deque\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 929, in _get_connection\n    connection = self.deque.pop()\nIndexError: pop from an empty deque\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 929, in _get_connection\n    connection = self.deque.pop()\nIndexError: pop from an empty deque\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 929, in _get_connection\n    connection = self.deque.pop()\nIndexError: pop from an empty deque\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/tmp/1660054649844-0/zeppelin_python.py\", line 153, in <module>\n    exec(code, _zcUserQueryNameSpace)\n  File \"<stdin>\", line 3, in <module>\n  File \"/usr/lib/spark/python/pyspark/sql/readwriter.py\", line 274, in json\n    return self._df(self._jreader.json(self._spark._sc._jvm.PythonUtils.toSeq(path)))\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1255, in __call__\n    answer = self.gateway_client.send_command(command)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 985, in send_command\n    response = connection.send_command(command)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1152, in send_command\n    answer = smart_decode(self.stream.readline()[:-1])\n  File \"/usr/lib64/python3.7/socket.py\", line 589, in readinto\n    return self._sock.recv_into(b)\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 277, in signal_handler\n    self.cancelAllJobs()\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 1047, in cancelAllJobs\n    self._jsc.sc().cancelAllJobs()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1255, in __call__\n    answer = self.gateway_client.send_command(command)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 983, in send_command\n    connection = self._get_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 931, in _get_connection\n    connection = self._create_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 937, in _create_connection\n    connection.start()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1071, in start\n    self._authenticate_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1087, in _authenticate_connection\n    answer = self.send_command(cmd)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1152, in send_command\n    answer = smart_decode(self.stream.readline()[:-1])\n  File \"/usr/lib64/python3.7/socket.py\", line 589, in readinto\n    return self._sock.recv_into(b)\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 277, in signal_handler\n    self.cancelAllJobs()\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 1047, in cancelAllJobs\n    self._jsc.sc().cancelAllJobs()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1255, in __call__\n    answer = self.gateway_client.send_command(command)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 983, in send_command\n    connection = self._get_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 931, in _get_connection\n    connection = self._create_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 937, in _create_connection\n    connection.start()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1071, in start\n    self._authenticate_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1087, in _authenticate_connection\n    answer = self.send_command(cmd)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1152, in send_command\n    answer = smart_decode(self.stream.readline()[:-1])\n  File \"/usr/lib64/python3.7/socket.py\", line 589, in readinto\n    return self._sock.recv_into(b)\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 277, in signal_handler\n    self.cancelAllJobs()\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 1047, in cancelAllJobs\n    self._jsc.sc().cancelAllJobs()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1255, in __call__\n    answer = self.gateway_client.send_command(command)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 983, in send_command\n    connection = self._get_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 931, in _get_connection\n    connection = self._create_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 937, in _create_connection\n    connection.start()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1071, in start\n    self._authenticate_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1087, in _authenticate_connection\n    answer = self.send_command(cmd)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1152, in send_command\n    answer = smart_decode(self.stream.readline()[:-1])\n  File \"/usr/lib64/python3.7/socket.py\", line 589, in readinto\n    return self._sock.recv_into(b)\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 277, in signal_handler\n    self.cancelAllJobs()\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 1047, in cancelAllJobs\n    self._jsc.sc().cancelAllJobs()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1255, in __call__\n    answer = self.gateway_client.send_command(command)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 983, in send_command\n    connection = self._get_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 931, in _get_connection\n    connection = self._create_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 937, in _create_connection\n    connection.start()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1071, in start\n    self._authenticate_connection()\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1087, in _authenticate_connection\n    answer = self.send_command(cmd)\n  File \"/usr/lib/spark/python/lib/py4j-0.10.7-src.zip/py4j/java_gateway.py\", line 1152, in send_command\n    answer = smart_decode(self.stream.readline()[:-1])\n  File \"/usr/lib64/python3.7/socket.py\", line 589, in readinto\n    return self._sock.recv_into(b)\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 278, in signal_handler\n    raise KeyboardInterrupt()\nKeyboardInterrupt\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/tmp/1660054649844-0/zeppelin_python.py\", line 178, in <module>\n    exception = traceback.format_exc()\n  File \"/usr/lib64/python3.7/traceback.py\", line 167, in format_exc\n    return \"\".join(format_exception(*sys.exc_info(), limit=limit, chain=chain))\n  File \"/usr/lib64/python3.7/traceback.py\", line 121, in format_exception\n    type(value), value, tb, limit=limit).format(chain=chain))\n  File \"/usr/lib64/python3.7/traceback.py\", line 508, in __init__\n    capture_locals=capture_locals)\n  File \"/usr/lib64/python3.7/traceback.py\", line 363, in extract\n    f.line\n  File \"/usr/lib64/python3.7/traceback.py\", line 285, in line\n    self._line = linecache.getline(self.filename, self.lineno).strip()\n  File \"/usr/lib64/python3.7/linecache.py\", line 16, in getline\n    lines = getlines(filename, module_globals)\n  File \"/usr/lib64/python3.7/linecache.py\", line 47, in getlines\n    return updatecache(filename, module_globals)\n  File \"/usr/lib64/python3.7/linecache.py\", line 136, in updatecache\n    with tokenize.open(fullname) as fp:\n  File \"/usr/lib64/python3.7/tokenize.py\", line 449, in open\n    encoding, lines = detect_encoding(buffer.readline)\n  File \"/usr/lib64/python3.7/tokenize.py\", line 418, in detect_encoding\n    first = read_or_stop()\n  File \"/usr/lib64/python3.7/tokenize.py\", line 376, in read_or_stop\n    return readline()\n  File \"/usr/lib/spark/python/pyspark/context.py\", line 278, in signal_handler\n    raise KeyboardInterrupt()\nKeyboardInterrupt\n"
+     }
+    ]
    },
    "apps": [],
-   "status": "READY",
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://ip-10-0-5-191.us-west-2.compute.internal:4040/jobs/job?id=0"
+      },
+      {
+       "jobUrl": "http://ip-10-0-5-191.us-west-2.compute.internal:4040/jobs/job?id=1"
+      },
+      {
+       "jobUrl": "http://ip-10-0-5-191.us-west-2.compute.internal:4040/jobs/job?id=2"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055010900_254839356",
+   "id": "paragraph_1660055010900_254839356",
+   "dateCreated": "2022-08-09T14:23:30+0000",
+   "dateStarted": "2022-08-09T14:23:31+0000",
+   "dateFinished": "2022-08-09T14:33:18+0000",
+   "status": "ABORT"
+  },
+  {
    "text": "%pyspark\nsongs.head(5)",
-   "id": "",
-   "config": {}
-  },
-  {
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:34+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
    "apps": [],
-   "status": "READY",
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055013692_766965958",
+   "id": "paragraph_1660055013692_766965958",
+   "dateCreated": "2022-08-09T14:23:33+0000",
+   "dateStarted": "2022-08-09T14:23:34+0000",
+   "dateFinished": "2022-08-09T14:33:17+0000",
+   "status": "ABORT"
+  },
+  {
    "text": "%md\n# Reads Log Data",
-   "id": "",
-   "config": {}
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:35+0000",
+   "progress": 0.0,
+   "config": {
+    "tableHide": true
+   },
+   "settings": {
+    "params": {
+     "bdtMeta": {
+      "inlay": {
+       "collapsed": true
+      }
+     }
+    },
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "HTML",
+      "data": "<h1>Reads Log Data</h1>\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055015111_1223880260",
+   "id": "paragraph_1660055015111_1223880260",
+   "dateCreated": "2022-08-09T14:23:35+0000",
+   "dateStarted": "2022-08-09T14:23:35+0000",
+   "dateFinished": "2022-08-09T14:23:35+0000",
+   "status": "FINISHED"
   },
   {
+   "text": "%pyspark\nlog_data_path = \"s3a://udacity-dend/log_data/*/*/*.json\"\nlogs = spark.read.json(log_data_path)\nlogs.printSchema()",
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:36+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
    "apps": [],
-   "status": "READY",
-   "text": "%pyspark\nlog_data_path = \"s3://udacity-dend/log_data\"\nlogs = spark.read.json(log_data_path)\nlogs.printSchema()",
-   "id": "",
-   "config": {}
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055016522_2086724135",
+   "id": "paragraph_1660055016522_2086724135",
+   "dateCreated": "2022-08-09T14:23:36+0000",
+   "status": "ABORT"
   },
   {
-   "settings": {
-    "params": {},
-    "forms": {}
-   },
-   "apps": [],
-   "status": "READY",
    "text": "%pyspark\nlogs.head(5)",
-   "id": "",
-   "config": {}
-  },
-  {
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:38+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
    "apps": [],
-   "status": "READY",
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055017858_904074874",
+   "id": "paragraph_1660055017858_904074874",
+   "dateCreated": "2022-08-09T14:23:37+0000",
+   "status": "ABORT"
+  },
+  {
    "text": "%md\n# Stop Spark Session",
-   "id": "",
-   "config": {}
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:40+0000",
+   "progress": 0.0,
+   "config": {
+    "tableHide": true
+   },
+   "settings": {
+    "params": {
+     "bdtMeta": {
+      "inlay": {
+       "collapsed": true
+      }
+     }
+    },
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "HTML",
+      "data": "<h1>Stop Spark Session</h1>\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055019662_1312560784",
+   "id": "paragraph_1660055019662_1312560784",
+   "dateCreated": "2022-08-09T14:23:39+0000",
+   "dateStarted": "2022-08-09T14:23:40+0000",
+   "dateFinished": "2022-08-09T14:23:40+0000",
+   "status": "FINISHED"
   },
   {
+   "text": "%pyspark\nspark.stop()",
+   "user": "anonymous",
+   "dateUpdated": "2022-08-09T14:23:41+0000",
+   "progress": 0.0,
+   "config": {},
    "settings": {
     "params": {},
     "forms": {}
    },
    "apps": [],
-   "status": "READY",
-   "text": "%pyspark\nspark.stop()",
-   "id": "",
-   "config": {}
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1660055021269_298927484",
+   "id": "paragraph_1660055021269_298927484",
+   "dateCreated": "2022-08-09T14:23:41+0000",
+   "status": "ABORT"
   }
  ],
  "name": "Zeppelin Notebook",
