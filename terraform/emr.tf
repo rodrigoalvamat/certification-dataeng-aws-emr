@@ -9,6 +9,7 @@ resource "aws_emr_cluster" "emr_cluster" {
 
   termination_protection            = false
   keep_job_flow_alive_when_no_steps = true
+  configurations_json               = file("configurations.json")
   log_uri                           = "s3://${var.s3_bucket}/${var.s3_log_uri}"
 
   ec2_attributes {
@@ -28,19 +29,31 @@ resource "aws_emr_cluster" "emr_cluster" {
     instance_count = var.emr_core_instance.count
   }
 
+  /*
   bootstrap_action {
     path = "s3://${var.s3_bucket}/${var.emr_bootstrap.key}"
     name = var.emr_bootstrap.name
     args = var.emr_bootstrap.args
   }
+  */
 
   step {
     action_on_failure = "CONTINUE"
-    name              = "Pip Install Notebook Magics"
+    name              = "Spark ETL Pipeline Script"
 
     hadoop_jar_step {
       jar  = "command-runner.jar"
-      args = ["sudo", "-u", "emr-notebook", "pip3", "install", "emr-notebooks-magics"]
+      args = [
+        "spark-submit",
+        "--master", "yarn",
+        "--deploy-mode", "cluster",
+        "--conf", "spark.dynamicAllocation.enabled=true",
+        "--conf", "spark.shuffle.service.enabled=true",
+        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl/etl.py",
+        "--py-files",
+        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl/config.py",
+        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl/metadata.py",
+      ]
     }
   }
 

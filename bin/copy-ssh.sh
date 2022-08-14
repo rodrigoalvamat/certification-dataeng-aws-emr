@@ -11,7 +11,7 @@ SCRIPT_PATH="$(readlink -f "${SCRIPT_PATH}")"
 SCRIPT_DIR="$(cd -P "$(dirname -- "${SCRIPT_PATH}")" >/dev/null 2>&1 && pwd)"
 
 # reads project config
-PROJECT_DIR=""${SCRIPT_DIR}"/.."
+PROJECT_DIR="${SCRIPT_DIR}/.."
 source <(grep = "$PROJECT_DIR"/emr.cfg)
 
 # copy the ssh key pair .pem file to the ERM cluster $HOME folder

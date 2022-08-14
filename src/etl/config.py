@@ -1,4 +1,4 @@
-"""Defines a utility function to read the EMR configuration from emr.cfg file.
+"""Defines a Config class to read the AWS EMR configuration from emr.cfg file.
 
 Check the emr.cfg.template file configuration sections and options.
 """
@@ -7,31 +7,53 @@ import os
 # config libs
 import configparser
 
-# Sets emr.cfg file path
+# dwh.cfg file path
 DIR = os.path.dirname(os.path.abspath(__file__))
-CONFIG_PATH = os.path.join(DIR, '../../', 'emr.cfg')
-
-# Initializes config parser
-PARSER = configparser.ConfigParser()
-PARSER.read_file(open(CONFIG_PATH, encoding='utf-8'))
+INI_PATH = os.path.join(DIR, 'etl.cfg')
 
 
-def get(section, option):
-    """Reads a config option value from a section.
+class Config:
+    """This class defines a wrapper for ConfigParser.
 
-    Retrieves an option value pertaining to the given section
-    from the dwh.cfg file.
+    Use the emr.cfg.template file as a reference to configure
+    the application according to your AWS account settings.
 
-    Args:
-        section: The emr.cfg file section name.
-          E.g. REDSHIFT
-        option: The section config option name.
-          E.g. PORT
+    Usage example:
 
-    Returns:
-        A value to the given section and option.
-        For example:
-
-        value = config.get('REDSHIFT', 'PORT')
+    config = Config()
+    config.get('S3', 'LANDING')
     """
-    return PARSER.get(section, option)
+
+    def __init__(self, local=False):
+        """Creates a Config object from emr.cfg file.
+
+        Config values will be UTF-8 encoded.
+
+        Args:
+            local: Defines if the data will be loaded and stored locally.
+        """
+        self.local = local
+        self.parser = configparser.ConfigParser()
+        self.parser.read_file(open(INI_PATH, encoding='utf-8'))
+
+    def get(self, section, option):
+        """Reads a config option value from a section.
+
+        Retrieves an option value pertaining to the given section
+        from the emr.cfg file.
+
+        Args:
+            section: The emr.cfg file section name.
+              E.g. EMR
+            option: The section config option name.
+              E.g. CLUSTER_ID
+
+        Returns:
+            A value to the given section and option.
+            For example:
+
+            value = config.get('EMR', 'CLUSTER_ID')
+        """
+        if section == 'S3' and self.local:
+            return os.path.join(DIR, self.parser.get('S3_LOCAL', option))
+        return self.parser.get(section, option)

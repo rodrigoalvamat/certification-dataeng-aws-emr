@@ -69,7 +69,7 @@ variable "emr_release" {
 variable "emr_applications" {
   description = "ERM cluster application list"
   type        = list(string)
-  default     = ["Spark", "Zeppelin", "Hive"]
+  default     = ["JupyterEnterpriseGateway", "Livy", "Hadoop", "Hive", "Spark", "Zeppelin"]
 }
 
 variable "emr_master_instance_type" {
@@ -100,6 +100,12 @@ variable "s3_bucket" {
   default     = "udacity-dataeng-emr"
 }
 
+variable "s3_udacity_bucket" {
+  description = "S3 Udacity bucket"
+  type        = string
+  default     = "udacity-dend"
+}
+
 variable "s3_log_uri" {
   description = "S2 EMR log bucket"
   type        = string
@@ -107,11 +113,20 @@ variable "s3_log_uri" {
 }
 
 variable "s3_data_files" {
-  description = "S3 EMR bucket folders"
+  description = "S3 EMR data files"
   type        = map(string)
   default     = {
     source = "../data"
     target = "application/data"
+  }
+}
+
+variable "s3_app_files" {
+  description = "S3 EMR app files"
+  type        = map(string)
+  default     = {
+    source = "../src"
+    target = "application/src"
   }
 }
 
