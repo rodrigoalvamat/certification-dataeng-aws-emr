@@ -90,7 +90,10 @@ variable "emr_core_instance" {
 variable "emr_roles" {
   description = "ERM cluster roles"
   type        = map(string)
-  default     = { service = "arn:aws:iam::977290156131:role/EMR_DefaultRole", instance = "EMR_EC2_DefaultRole" }
+  default     = {
+    service = "arn:aws:iam::977290156131:role/EMR_DefaultRole",
+    instance = "EMR_EC2_DefaultRole"
+  }
 }
 
 // S3

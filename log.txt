@@ -1,0 +1,5 @@
+.compute.internal:8020/user/hadoop/.sparkStaging
+ hadoop hdfsadmingroup 
+ Set(); users  with modify permissions: Set(hadoop)
+
+ spark-submit --master yarn-client
