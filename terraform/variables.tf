@@ -126,6 +126,7 @@ variable "s3_app_files" {
   type        = object({ source = list(string), target = string } )
   default     = {
     source = [
+      "../src/etl/__init__.py",
       "../src/etl/etl.py",
       "../src/etl/etl.cfg",
       "../src/etl/config.py",

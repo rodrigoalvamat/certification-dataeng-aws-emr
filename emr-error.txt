@@ -1,54 +1,64 @@
 Using properties file: /usr/lib/spark/conf/spark-defaults.conf
+Adding default property: spark.shuffle.spill.compress=true
+Adding default property: spark.serializer=org.apache.spark.serializer.KryoSerializer
 Adding default property: spark.sql.warehouse.dir=hdfs:///user/spark/warehouse
+Adding default property: spark.speculation=false
 Adding default property: spark.yarn.dist.files=/etc/hudi/conf/hudi-defaults.conf
 Adding default property: spark.sql.parquet.fs.optimized.committer.optimization-enabled=true
 Adding default property: spark.history.fs.logDirectory=hdfs:///var/log/spark/apps
 Adding default property: spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem=2
 Adding default property: spark.hadoop.mapreduce.output.fs.optimized.committer.enabled=true
 Adding default property: spark.eventLog.enabled=true
+Adding default property: spark.sql.adaptive.enabled=true
 Adding default property: spark.shuffle.service.enabled=true
+Adding default property: spark.rdd.compress=true
 Adding default property: spark.driver.extraLibraryPath=/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
-Adding default property: spark.emr.default.executor.memory=4269M
-Adding default property: spark.yarn.historyServer.address=ip-172-31-20-14.us-west-2.compute.internal:18080
+Adding default property: spark.shuffle.compress=true
+Adding default property: spark.emr.default.executor.memory=512M
+Adding default property: spark.yarn.historyServer.address=ip-10-0-5-115.us-west-2.compute.internal:18080
 Adding default property: spark.stage.attempt.ignoreOnDecommissionFetchFailure=true
-Adding default property: spark.driver.memory=2048M
+Adding default property: spark.driver.memory=512M
+Adding default property: spark.emr.maximizeResourceAllocation=true
 Adding default property: spark.files.fetchFailure.unRegisterOutputOnHost=true
+Adding default property: spark.default.parallelism=8
 Adding default property: spark.executor.defaultJavaOptions=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'
 Adding default property: spark.resourceManager.cleanupExpiredHost=true
 Adding default property: spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS=$(hostname -f)
 Adding default property: spark.sql.emr.internal.extensions=com.amazonaws.emr.spark.EmrSparkSessionExtensions
-Adding default property: spark.emr.default.executor.cores=4
+Adding default property: spark.storage.level=MEMORY_AND_DISK_SER
+Adding default property: spark.emr.default.executor.cores=2
+Adding default property: spark.driver.extraJavaOptions=-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'
 Adding default property: spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds=2000
+Adding default property: spark.submit.deployMode=cluster
 Adding default property: spark.master=yarn
 Adding default property: spark.sql.parquet.output.committer.class=com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter
 Adding default property: spark.driver.defaultJavaOptions=-XX:OnOutOfMemoryError='kill -9 %p'
 Adding default property: spark.blacklist.decommissioning.timeout=1h
 Adding default property: spark.executor.extraLibraryPath=/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
 Adding default property: spark.sql.hive.metastore.sharedPrefixes=com.amazonaws.services.dynamodbv2
-Adding default property: spark.executor.memory=4269M
+Adding default property: spark.executor.memory=512M
 Adding default property: spark.driver.extraClassPath=/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
 Adding default property: spark.eventLog.dir=hdfs:///var/log/spark/apps
 Adding default property: spark.dynamicAllocation.enabled=true
 Adding default property: spark.executor.extraClassPath=/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
-Adding default property: spark.executor.cores=4
+Adding default property: spark.executor.cores=2
 Adding default property: spark.history.ui.port=18080
 Adding default property: spark.blacklist.decommissioning.enabled=true
 Adding default property: spark.decommissioning.timeout.threshold=20
 Adding default property: spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem=true
 Adding default property: spark.hadoop.yarn.timeline-service.enabled=false
-Adding default property: spark.yarn.executor.memoryOverheadFactor=0.1875
 Parsed arguments:
   master                  yarn
   deployMode              cluster
-  executorMemory          4269M
-  executorCores           4
+  executorMemory          512M
+  executorCores           2
   totalExecutorCores      null
   propertiesFile          /usr/lib/spark/conf/spark-defaults.conf
-  driverMemory            2048M
+  driverMemory            512M
   driverCores             null
   driverExtraClassPath    /usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
   driverExtraLibraryPath  /usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
-  driverExtraJavaOptions  null
+  driverExtraJavaOptions  -XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'
   supervise               false
   queue                   null
   numExecutors            null
@@ -58,7 +68,7 @@ Parsed arguments:
   mainClass               null
   primaryResource         s3a://udacity-dataeng-emr/application/etl/etl.py
   name                    etl.py
-  childArgs               [--py-files s3a://udacity-dataeng-emr/application/etl/__init__.py s3a://udacity-dataeng-emr/application/etl/config.py s3a://udacity-dataeng-emr/application/etl/etl.cfg s3a://udacity-dataeng-emr/application/etl/metadata.py]
+  childArgs               [--py-files s3a://udacity-dataeng-emr/application/etl/__init__.py,s3a://udacity-dataeng-emr/application/etl/config.py,s3a://udacity-dataeng-emr/application/etl/etl.cfg,s3a://udacity-dataeng-emr/application/etl/metadata.py]
   jars                    null
   packages                null
   packagesExclusions      null
@@ -68,46 +78,56 @@ Parsed arguments:
 Spark properties used, including those specified through
  --conf and those from the properties file /usr/lib/spark/conf/spark-defaults.conf:
   (spark.sql.emr.internal.extensions,com.amazonaws.emr.spark.EmrSparkSessionExtensions)
-  (spark.blacklist.decommissioning.timeout,1h)
   (spark.executor.defaultJavaOptions,-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p')
-  (spark.yarn.executor.memoryOverheadFactor,0.1875)
+  (spark.blacklist.decommissioning.timeout,1h)
+  (spark.shuffle.spill.compress,true)
+  (spark.emr.maximizeResourceAllocation,true)
+  (spark.default.parallelism,8)
   (spark.executor.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
   (spark.blacklist.decommissioning.enabled,true)
   (spark.hadoop.yarn.timeline-service.enabled,false)
-  (spark.driver.memory,2048M)
-  (spark.executor.memory,4269M)
+  (spark.driver.memory,512M)
+  (spark.executor.memory,512M)
   (spark.sql.warehouse.dir,hdfs:///user/spark/warehouse)
   (spark.sql.parquet.fs.optimized.committer.optimization-enabled,true)
   (spark.driver.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-  (spark.yarn.historyServer.address,ip-172-31-20-14.us-west-2.compute.internal:18080)
+  (spark.shuffle.compress,true)
+  (spark.yarn.historyServer.address,ip-10-0-5-115.us-west-2.compute.internal:18080)
   (spark.eventLog.enabled,true)
   (spark.yarn.dist.files,/etc/hudi/conf/hudi-defaults.conf)
   (spark.files.fetchFailure.unRegisterOutputOnHost,true)
   (spark.history.ui.port,18080)
-  (spark.stage.attempt.ignoreOnDecommissionFetchFailure,true)
   (spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds,2000)
+  (spark.stage.attempt.ignoreOnDecommissionFetchFailure,true)
+  (spark.rdd.compress,true)
   (spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS,$(hostname -f))
   (spark.driver.defaultJavaOptions,-XX:OnOutOfMemoryError='kill -9 %p')
+  (spark.serializer,org.apache.spark.serializer.KryoSerializer)
+  (spark.speculation,false)
   (spark.resourceManager.cleanupExpiredHost,true)
-  (spark.shuffle.service.enabled,true)
   (spark.history.fs.logDirectory,hdfs:///var/log/spark/apps)
-  (spark.emr.default.executor.cores,4)
+  (spark.shuffle.service.enabled,true)
+  (spark.emr.default.executor.cores,2)
   (spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem,2)
+  (spark.driver.extraJavaOptions,-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p')
+  (spark.submit.deployMode,cluster)
   (spark.hadoop.mapreduce.output.fs.optimized.committer.enabled,true)
+  (spark.sql.adaptive.enabled,true)
+  (spark.storage.level,MEMORY_AND_DISK_SER)
   (spark.executor.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
   (spark.sql.hive.metastore.sharedPrefixes,com.amazonaws.services.dynamodbv2)
   (spark.eventLog.dir,hdfs:///var/log/spark/apps)
+  (spark.emr.default.executor.memory,512M)
   (spark.master,yarn)
-  (spark.emr.default.executor.memory,4269M)
   (spark.dynamicAllocation.enabled,true)
   (spark.sql.parquet.output.committer.class,com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter)
-  (spark.executor.cores,4)
+  (spark.executor.cores,2)
   (spark.decommissioning.timeout.threshold,20)
   (spark.driver.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
   (spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem,true)
 
 
-22/08/15 10:42:20 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+22/08/15 13:12:39 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Main class:
 org.apache.spark.deploy.yarn.YarnClusterApplication
 Arguments:
@@ -118,35 +138,39 @@ org.apache.spark.deploy.PythonRunner
 --arg
 --py-files
 --arg
-s3a://udacity-dataeng-emr/application/etl/__init__.py
---arg
-s3a://udacity-dataeng-emr/application/etl/config.py
---arg
-s3a://udacity-dataeng-emr/application/etl/etl.cfg
---arg
-s3a://udacity-dataeng-emr/application/etl/metadata.py
+s3a://udacity-dataeng-emr/application/etl/__init__.py,s3a://udacity-dataeng-emr/application/etl/config.py,s3a://udacity-dataeng-emr/application/etl/etl.cfg,s3a://udacity-dataeng-emr/application/etl/metadata.py
 Spark config:
+(spark.shuffle.spill.compress,true)
+(spark.serializer,org.apache.spark.serializer.KryoSerializer)
 (spark.sql.warehouse.dir,hdfs:///user/spark/warehouse)
+(spark.speculation,false)
 (spark.yarn.dist.files,file:/etc/hudi/conf.dist/hudi-defaults.conf)
 (spark.sql.parquet.fs.optimized.committer.optimization-enabled,true)
 (spark.history.fs.logDirectory,hdfs:///var/log/spark/apps)
 (spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem,2)
 (spark.hadoop.mapreduce.output.fs.optimized.committer.enabled,true)
 (spark.eventLog.enabled,true)
+(spark.sql.adaptive.enabled,true)
 (spark.shuffle.service.enabled,true)
+(spark.rdd.compress,true)
 (spark.driver.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-(spark.emr.default.executor.memory,4269M)
-(spark.yarn.historyServer.address,ip-172-31-20-14.us-west-2.compute.internal:18080)
+(spark.shuffle.compress,true)
+(spark.emr.default.executor.memory,512M)
+(spark.yarn.historyServer.address,ip-10-0-5-115.us-west-2.compute.internal:18080)
 (spark.stage.attempt.ignoreOnDecommissionFetchFailure,true)
 (spark.app.name,etl.py)
-(spark.driver.memory,2048M)
+(spark.driver.memory,512M)
+(spark.emr.maximizeResourceAllocation,true)
 (spark.files.fetchFailure.unRegisterOutputOnHost,true)
 (spark.submit.pyFiles,)
+(spark.default.parallelism,8)
 (spark.executor.defaultJavaOptions,-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p')
 (spark.resourceManager.cleanupExpiredHost,true)
 (spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS,$(hostname -f))
 (spark.sql.emr.internal.extensions,com.amazonaws.emr.spark.EmrSparkSessionExtensions)
-(spark.emr.default.executor.cores,4)
+(spark.storage.level,MEMORY_AND_DISK_SER)
+(spark.emr.default.executor.cores,2)
+(spark.driver.extraJavaOptions,-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p')
 (spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds,2000)
 (spark.submit.deployMode,cluster)
 (spark.master,yarn)
@@ -155,520 +179,102 @@ Spark config:
 (spark.blacklist.decommissioning.timeout,1h)
 (spark.executor.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
 (spark.sql.hive.metastore.sharedPrefixes,com.amazonaws.services.dynamodbv2)
-(spark.executor.memory,4269M)
+(spark.executor.memory,512M)
 (spark.driver.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
 (spark.eventLog.dir,hdfs:///var/log/spark/apps)
 (spark.dynamicAllocation.enabled,true)
 (spark.executor.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-(spark.executor.cores,4)
+(spark.executor.cores,2)
 (spark.history.ui.port,18080)
 (spark.yarn.isPython,true)
 (spark.blacklist.decommissioning.enabled,true)
 (spark.decommissioning.timeout.threshold,20)
 (spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem,true)
 (spark.hadoop.yarn.timeline-service.enabled,false)
-(spark.yarn.executor.memoryOverheadFactor,0.1875)
 Classpath elements:
 
 
 
-22/08/15 10:42:20 INFO RMProxy: Connecting to ResourceManager at ip-172-31-20-14.us-west-2.compute.internal/172.31.20.14:8032
-22/08/15 10:42:21 INFO Client: Requesting a new application from cluster with 1 NodeManagers
-22/08/15 10:42:21 INFO Configuration: resource-types.xml not found
-22/08/15 10:42:21 INFO ResourceUtils: Unable to find 'resource-types.xml'.
-22/08/15 10:42:21 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (6144 MB per container)
-22/08/15 10:42:21 INFO Client: Will allocate AM container, with 2432 MB memory including 384 MB overhead
-22/08/15 10:42:21 INFO Client: Setting up container launch context for our AM
-22/08/15 10:42:21 INFO Client: Setting up the launch environment for our AM container
-22/08/15 10:42:21 INFO Client: Preparing resources for our AM container
-22/08/15 10:42:22 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
-22/08/15 10:42:26 INFO Client: Uploading resource file:/mnt/tmp/spark-295d73ae-6003-4707-a085-a967a86796e8/__spark_libs__8593923674619109473.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001/__spark_libs__8593923674619109473.zip
-22/08/15 10:42:29 INFO Client: Uploading resource file:/etc/hudi/conf.dist/hudi-defaults.conf -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001/hudi-defaults.conf
-22/08/15 10:42:29 INFO MetricsConfig: Loaded properties from hadoop-metrics2.properties
-22/08/15 10:42:29 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 300 second(s).
-22/08/15 10:42:29 INFO MetricsSystemImpl: s3a-file-system metrics system started
-22/08/15 10:42:31 INFO Client: Uploading resource s3a://udacity-dataeng-emr/application/etl/etl.py -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001/etl.py
-22/08/15 10:42:31 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/pyspark.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001/pyspark.zip
-22/08/15 10:42:31 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/py4j-0.10.9.3-src.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001/py4j-0.10.9.3-src.zip
-22/08/15 10:42:32 INFO Client: Uploading resource file:/mnt/tmp/spark-295d73ae-6003-4707-a085-a967a86796e8/__spark_conf__983823108649361672.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001/__spark_conf__.zip
-22/08/15 10:42:33 INFO SecurityManager: Changing view acls to: hadoop
-22/08/15 10:42:33 INFO SecurityManager: Changing modify acls to: hadoop
-22/08/15 10:42:33 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:42:33 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:42:33 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(hadoop); groups with view permissions: Set(); users  with modify permissions: Set(hadoop); groups with modify permissions: Set()
-22/08/15 10:42:33 INFO Client: Submitting application application_1660559497527_0001 to ResourceManager
-22/08/15 10:42:33 INFO YarnClientImpl: Submitted application application_1660559497527_0001
-22/08/15 10:42:35 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:35 INFO Client:
-         client token: N/A
-         diagnostics: [Mon Aug 15 10:42:33 +0000 2022] Scheduler has assigned a container for AM, waiting for AM container to be launched
-         ApplicationMaster host: N/A
-         ApplicationMaster RPC port: -1
-         queue: default
-         start time: 1660560153302
-         final status: UNDEFINED
-         tracking URL: http://ip-172-31-20-14.us-west-2.compute.internal:20888/proxy/application_1660559497527_0001/
-         user: hadoop
-22/08/15 10:42:36 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:37 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:38 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:39 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:40 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:41 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:42 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:43 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:44 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:45 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:46 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:47 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:48 INFO Client: Application report for application_1660559497527_0001 (state: ACCEPTED)
-22/08/15 10:42:49 INFO Client: Application report for application_1660559497527_0001 (state: FAILED)
-22/08/15 10:42:49 INFO Client:
-         client token: N/A
-         diagnostics: Application application_1660559497527_0001 failed 2 times due to AM Container for appattempt_1660559497527_0001_000002 exited with  exitCode: 13
-Failing this attempt.Diagnostics: [2022-08-15 10:42:48.454]Exception from container-launch.
-Container id: container_1660559497527_0001_02_000001
-Exit code: 13
-
-[2022-08-15 10:42:48.459]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
-Last 4096 bytes of prelaunch.err :
-Last 4096 bytes of stderr :
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for INT
-22/08/15 10:42:46 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 10:42:46 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 10:42:46 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:42:46 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:42:46 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 10:42:46 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0001_000002
-22/08/15 10:42:46 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 10:42:46 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 10:42:47 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 10:42:47 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 10:42:47 ERROR ApplicationMaster: Uncaught exception:
-org.apache.spark.SparkException: Exception thrown in awaitResult:
-        at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.run(ApplicationMaster.scala:276)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:916)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:915)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at javax.security.auth.Subject.doAs(Subject.java:422)
-        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$.main(ApplicationMaster.scala:915)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.main(ApplicationMaster.scala)
-Caused by: org.apache.spark.SparkUserAppException: User application exited with 1
-        at org.apache.spark.deploy.PythonRunner$.main(PythonRunner.scala:111)
-        at org.apache.spark.deploy.PythonRunner.main(PythonRunner.scala)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 10:42:47 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001
-22/08/15 10:42:48 INFO ShutdownHookManager: Shutdown hook called
-
-
-[2022-08-15 10:42:48.460]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
-Last 4096 bytes of prelaunch.err :
-Last 4096 bytes of stderr :
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for INT
-22/08/15 10:42:46 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 10:42:46 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 10:42:46 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:42:46 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:42:46 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 10:42:46 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0001_000002
-22/08/15 10:42:46 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 10:42:46 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 10:42:47 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 10:42:47 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 10:42:47 ERROR ApplicationMaster: Uncaught exception:
-org.apache.spark.SparkException: Exception thrown in awaitResult:
-        at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.run(ApplicationMaster.scala:276)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:916)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:915)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at javax.security.auth.Subject.doAs(Subject.java:422)
-        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$.main(ApplicationMaster.scala:915)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.main(ApplicationMaster.scala)
-Caused by: org.apache.spark.SparkUserAppException: User application exited with 1
-        at org.apache.spark.deploy.PythonRunner$.main(PythonRunner.scala:111)
-        at org.apache.spark.deploy.PythonRunner.main(PythonRunner.scala)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 10:42:47 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001
-22/08/15 10:42:48 INFO ShutdownHookManager: Shutdown hook called
-
-
-For more detailed output, check the application tracking page: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0001 Then click on links to logs of each attempt.
-. Failing the application.
-         ApplicationMaster host: N/A
-         ApplicationMaster RPC port: -1
-         queue: default
-         start time: 1660560153302
-         final status: FAILED
-         tracking URL: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0001
-         user: hadoop
-22/08/15 10:42:49 ERROR Client: Application diagnostics message: Application application_1660559497527_0001 failed 2 times due to AM Container for appattempt_1660559497527_0001_000002 exited with  exitCode: 13
-Failing this attempt.Diagnostics: [2022-08-15 10:42:48.454]Exception from container-launch.
-Container id: container_1660559497527_0001_02_000001
-Exit code: 13
-
-[2022-08-15 10:42:48.459]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
-Last 4096 bytes of prelaunch.err :
-Last 4096 bytes of stderr :
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for INT
-22/08/15 10:42:46 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 10:42:46 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 10:42:46 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:42:46 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:42:46 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 10:42:46 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0001_000002
-22/08/15 10:42:46 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 10:42:46 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 10:42:47 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 10:42:47 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 10:42:47 ERROR ApplicationMaster: Uncaught exception:
-org.apache.spark.SparkException: Exception thrown in awaitResult:
-        at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.run(ApplicationMaster.scala:276)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:916)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:915)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at javax.security.auth.Subject.doAs(Subject.java:422)
-        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$.main(ApplicationMaster.scala:915)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.main(ApplicationMaster.scala)
-Caused by: org.apache.spark.SparkUserAppException: User application exited with 1
-        at org.apache.spark.deploy.PythonRunner$.main(PythonRunner.scala:111)
-        at org.apache.spark.deploy.PythonRunner.main(PythonRunner.scala)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 10:42:47 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001
-22/08/15 10:42:48 INFO ShutdownHookManager: Shutdown hook called
-
-
-[2022-08-15 10:42:48.460]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
-Last 4096 bytes of prelaunch.err :
-Last 4096 bytes of stderr :
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 10:42:45 INFO SignalUtils: Registering signal handler for INT
-22/08/15 10:42:46 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 10:42:46 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 10:42:46 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:42:46 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:42:46 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 10:42:46 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0001_000002
-22/08/15 10:42:46 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 10:42:46 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 10:42:47 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 10:42:47 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 10:42:47 ERROR ApplicationMaster: Uncaught exception:
-org.apache.spark.SparkException: Exception thrown in awaitResult:
-        at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.run(ApplicationMaster.scala:276)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:916)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:915)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at javax.security.auth.Subject.doAs(Subject.java:422)
-        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$.main(ApplicationMaster.scala:915)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.main(ApplicationMaster.scala)
-Caused by: org.apache.spark.SparkUserAppException: User application exited with 1
-        at org.apache.spark.deploy.PythonRunner$.main(PythonRunner.scala:111)
-        at org.apache.spark.deploy.PythonRunner.main(PythonRunner.scala)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 10:42:47 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0001
-22/08/15 10:42:48 INFO ShutdownHookManager: Shutdown hook called
-
-
-For more detailed output, check the application tracking page: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0001 Then click on links to logs of each attempt.
-. Failing the application.
-Exception in thread "main" org.apache.spark.SparkException: Application application_1660559497527_0001 finished with failed status
-        at org.apache.spark.deploy.yarn.Client.run(Client.scala:1294)
-        at org.apache.spark.deploy.yarn.YarnClusterApplication.start(Client.scala:1688)
-        at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:1000)
-        at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:180)
-        at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:203)
-        at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:90)
-        at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1089)
-        at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1098)
-        at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
-22/08/15 10:42:49 INFO ShutdownHookManager: Shutdown hook called
-22/08/15 10:42:49 INFO ShutdownHookManager: Deleting directory /mnt/tmp/spark-699e8440-7502-49f0-b99a-628a974b7756
-22/08/15 10:42:49 INFO ShutdownHookManager: Deleting directory /mnt/tmp/spark-295d73ae-6003-4707-a085-a967a86796e8
-22/08/15 10:42:49 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
-22/08/15 10:42:49 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
-22/08/15 10:42:49 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.
-(py310) [woox@woox datadiver-aws-emr]$ ./bin/submit.sh > emr-error.txt
-Using properties file: /usr/lib/spark/conf/spark-defaults.conf
-Adding default property: spark.sql.warehouse.dir=hdfs:///user/spark/warehouse
-Adding default property: spark.yarn.dist.files=/etc/hudi/conf/hudi-defaults.conf
-Adding default property: spark.sql.parquet.fs.optimized.committer.optimization-enabled=true
-Adding default property: spark.history.fs.logDirectory=hdfs:///var/log/spark/apps
-Adding default property: spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem=2
-Adding default property: spark.hadoop.mapreduce.output.fs.optimized.committer.enabled=true
-Adding default property: spark.eventLog.enabled=true
-Adding default property: spark.shuffle.service.enabled=true
-Adding default property: spark.driver.extraLibraryPath=/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
-Adding default property: spark.emr.default.executor.memory=4269M
-Adding default property: spark.yarn.historyServer.address=ip-172-31-20-14.us-west-2.compute.internal:18080
-Adding default property: spark.stage.attempt.ignoreOnDecommissionFetchFailure=true
-Adding default property: spark.driver.memory=2048M
-Adding default property: spark.files.fetchFailure.unRegisterOutputOnHost=true
-Adding default property: spark.executor.defaultJavaOptions=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'
-Adding default property: spark.resourceManager.cleanupExpiredHost=true
-Adding default property: spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS=$(hostname -f)
-Adding default property: spark.sql.emr.internal.extensions=com.amazonaws.emr.spark.EmrSparkSessionExtensions
-Adding default property: spark.emr.default.executor.cores=4
-Adding default property: spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds=2000
-Adding default property: spark.master=yarn
-Adding default property: spark.sql.parquet.output.committer.class=com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter
-Adding default property: spark.driver.defaultJavaOptions=-XX:OnOutOfMemoryError='kill -9 %p'
-Adding default property: spark.blacklist.decommissioning.timeout=1h
-Adding default property: spark.executor.extraLibraryPath=/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
-Adding default property: spark.sql.hive.metastore.sharedPrefixes=com.amazonaws.services.dynamodbv2
-Adding default property: spark.executor.memory=4269M
-Adding default property: spark.driver.extraClassPath=/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
-Adding default property: spark.eventLog.dir=hdfs:///var/log/spark/apps
-Adding default property: spark.dynamicAllocation.enabled=true
-Adding default property: spark.executor.extraClassPath=/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
-Adding default property: spark.executor.cores=4
-Adding default property: spark.history.ui.port=18080
-Adding default property: spark.blacklist.decommissioning.enabled=true
-Adding default property: spark.decommissioning.timeout.threshold=20
-Adding default property: spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem=true
-Adding default property: spark.hadoop.yarn.timeline-service.enabled=false
-Adding default property: spark.yarn.executor.memoryOverheadFactor=0.1875
-Parsed arguments:
-  master                  yarn
-  deployMode              cluster
-  executorMemory          4269M
-  executorCores           4
-  totalExecutorCores      null
-  propertiesFile          /usr/lib/spark/conf/spark-defaults.conf
-  driverMemory            2048M
-  driverCores             null
-  driverExtraClassPath    /usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
-  driverExtraLibraryPath  /usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
-  driverExtraJavaOptions  null
-  supervise               false
-  queue                   null
-  numExecutors            null
-  files                   null
-  pyFiles                 null
-  archives                null
-  mainClass               null
-  primaryResource         s3a://udacity-dataeng-emr/application/etl/etl.py
-  name                    etl.py
-  childArgs               [--py-files s3a://udacity-dataeng-emr/application/etl/__init__.py s3a://udacity-dataeng-emr/application/etl/config.py s3a://udacity-dataeng-emr/application/etl/etl.cfg s3a://udacity-dataeng-emr/application/etl/metadata.py]
-  jars                    null
-  packages                null
-  packagesExclusions      null
-  repositories            null
-  verbose                 true
-
-Spark properties used, including those specified through
- --conf and those from the properties file /usr/lib/spark/conf/spark-defaults.conf:
-  (spark.sql.emr.internal.extensions,com.amazonaws.emr.spark.EmrSparkSessionExtensions)
-  (spark.blacklist.decommissioning.timeout,1h)
-  (spark.executor.defaultJavaOptions,-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p')
-  (spark.yarn.executor.memoryOverheadFactor,0.1875)
-  (spark.executor.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-  (spark.blacklist.decommissioning.enabled,true)
-  (spark.hadoop.yarn.timeline-service.enabled,false)
-  (spark.driver.memory,2048M)
-  (spark.executor.memory,4269M)
-  (spark.sql.warehouse.dir,hdfs:///user/spark/warehouse)
-  (spark.sql.parquet.fs.optimized.committer.optimization-enabled,true)
-  (spark.driver.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-  (spark.yarn.historyServer.address,ip-172-31-20-14.us-west-2.compute.internal:18080)
-  (spark.eventLog.enabled,true)
-  (spark.yarn.dist.files,/etc/hudi/conf/hudi-defaults.conf)
-  (spark.files.fetchFailure.unRegisterOutputOnHost,true)
-  (spark.history.ui.port,18080)
-  (spark.stage.attempt.ignoreOnDecommissionFetchFailure,true)
-  (spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds,2000)
-  (spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS,$(hostname -f))
-  (spark.driver.defaultJavaOptions,-XX:OnOutOfMemoryError='kill -9 %p')
-  (spark.resourceManager.cleanupExpiredHost,true)
-  (spark.shuffle.service.enabled,true)
-  (spark.history.fs.logDirectory,hdfs:///var/log/spark/apps)
-  (spark.emr.default.executor.cores,4)
-  (spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem,2)
-  (spark.hadoop.mapreduce.output.fs.optimized.committer.enabled,true)
-  (spark.executor.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-  (spark.sql.hive.metastore.sharedPrefixes,com.amazonaws.services.dynamodbv2)
-  (spark.eventLog.dir,hdfs:///var/log/spark/apps)
-  (spark.master,yarn)
-  (spark.emr.default.executor.memory,4269M)
-  (spark.dynamicAllocation.enabled,true)
-  (spark.sql.parquet.output.committer.class,com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter)
-  (spark.executor.cores,4)
-  (spark.decommissioning.timeout.threshold,20)
-  (spark.driver.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-  (spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem,true)
-
-
-22/08/15 10:53:14 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-Main class:
-org.apache.spark.deploy.yarn.YarnClusterApplication
-Arguments:
---primary-py-file
-s3a://udacity-dataeng-emr/application/etl/etl.py
---class
-org.apache.spark.deploy.PythonRunner
---arg
---py-files
---arg
-s3a://udacity-dataeng-emr/application/etl/__init__.py
---arg
-s3a://udacity-dataeng-emr/application/etl/config.py
---arg
-s3a://udacity-dataeng-emr/application/etl/etl.cfg
---arg
-s3a://udacity-dataeng-emr/application/etl/metadata.py
-Spark config:
-(spark.sql.warehouse.dir,hdfs:///user/spark/warehouse)
-(spark.yarn.dist.files,file:/etc/hudi/conf.dist/hudi-defaults.conf)
-(spark.sql.parquet.fs.optimized.committer.optimization-enabled,true)
-(spark.history.fs.logDirectory,hdfs:///var/log/spark/apps)
-(spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem,2)
-(spark.hadoop.mapreduce.output.fs.optimized.committer.enabled,true)
-(spark.eventLog.enabled,true)
-(spark.shuffle.service.enabled,true)
-(spark.driver.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-(spark.emr.default.executor.memory,4269M)
-(spark.yarn.historyServer.address,ip-172-31-20-14.us-west-2.compute.internal:18080)
-(spark.stage.attempt.ignoreOnDecommissionFetchFailure,true)
-(spark.app.name,etl.py)
-(spark.driver.memory,2048M)
-(spark.files.fetchFailure.unRegisterOutputOnHost,true)
-(spark.submit.pyFiles,)
-(spark.executor.defaultJavaOptions,-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p')
-(spark.resourceManager.cleanupExpiredHost,true)
-(spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS,$(hostname -f))
-(spark.sql.emr.internal.extensions,com.amazonaws.emr.spark.EmrSparkSessionExtensions)
-(spark.emr.default.executor.cores,4)
-(spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds,2000)
-(spark.submit.deployMode,cluster)
-(spark.master,yarn)
-(spark.sql.parquet.output.committer.class,com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter)
-(spark.driver.defaultJavaOptions,-XX:OnOutOfMemoryError='kill -9 %p')
-(spark.blacklist.decommissioning.timeout,1h)
-(spark.executor.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-(spark.sql.hive.metastore.sharedPrefixes,com.amazonaws.services.dynamodbv2)
-(spark.executor.memory,4269M)
-(spark.driver.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-(spark.eventLog.dir,hdfs:///var/log/spark/apps)
-(spark.dynamicAllocation.enabled,true)
-(spark.executor.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-(spark.executor.cores,4)
-(spark.history.ui.port,18080)
-(spark.yarn.isPython,true)
-(spark.blacklist.decommissioning.enabled,true)
-(spark.decommissioning.timeout.threshold,20)
-(spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem,true)
-(spark.hadoop.yarn.timeline-service.enabled,false)
-(spark.yarn.executor.memoryOverheadFactor,0.1875)
-Classpath elements:
-
-
-
-22/08/15 10:53:14 INFO RMProxy: Connecting to ResourceManager at ip-172-31-20-14.us-west-2.compute.internal/172.31.20.14:8032
-22/08/15 10:53:14 INFO Client: Requesting a new application from cluster with 1 NodeManagers
-22/08/15 10:53:15 INFO Configuration: resource-types.xml not found
-22/08/15 10:53:15 INFO ResourceUtils: Unable to find 'resource-types.xml'.
-22/08/15 10:53:15 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (6144 MB per container)
-22/08/15 10:53:15 INFO Client: Will allocate AM container, with 2432 MB memory including 384 MB overhead
-22/08/15 10:53:15 INFO Client: Setting up container launch context for our AM
-22/08/15 10:53:15 INFO Client: Setting up the launch environment for our AM container
-22/08/15 10:53:15 INFO Client: Preparing resources for our AM container
-22/08/15 10:53:15 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
-22/08/15 10:53:19 INFO Client: Uploading resource file:/mnt/tmp/spark-e47cef3d-4cac-421b-afd1-b669785f053a/__spark_libs__1993266924570179895.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002/__spark_libs__1993266924570179895.zip
-22/08/15 10:53:23 INFO Client: Uploading resource file:/etc/hudi/conf.dist/hudi-defaults.conf -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002/hudi-defaults.conf
-22/08/15 10:53:23 INFO MetricsConfig: Loaded properties from hadoop-metrics2.properties
-22/08/15 10:53:23 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 300 second(s).
-22/08/15 10:53:23 INFO MetricsSystemImpl: s3a-file-system metrics system started
-22/08/15 10:53:25 INFO Client: Uploading resource s3a://udacity-dataeng-emr/application/etl/etl.py -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002/etl.py
-22/08/15 10:53:25 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/pyspark.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002/pyspark.zip
-22/08/15 10:53:26 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/py4j-0.10.9.3-src.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002/py4j-0.10.9.3-src.zip
-22/08/15 10:53:26 INFO Client: Uploading resource file:/mnt/tmp/spark-e47cef3d-4cac-421b-afd1-b669785f053a/__spark_conf__3912872231609230186.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002/__spark_conf__.zip
-22/08/15 10:53:26 INFO SecurityManager: Changing view acls to: hadoop
-22/08/15 10:53:26 INFO SecurityManager: Changing modify acls to: hadoop
-22/08/15 10:53:26 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:53:26 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:53:26 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(hadoop); groups with view permissions: Set(); users  with modify permissions: Set(hadoop); groups with modify permissions: Set()
-22/08/15 10:53:26 INFO Client: Submitting application application_1660559497527_0002 to ResourceManager
-22/08/15 10:53:27 INFO YarnClientImpl: Submitted application application_1660559497527_0002
-22/08/15 10:53:28 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:28 INFO Client:
+22/08/15 13:12:40 INFO RMProxy: Connecting to ResourceManager at ip-10-0-5-115.us-west-2.compute.internal/10.0.5.115:8032
+22/08/15 13:12:40 INFO Client: Requesting a new application from cluster with 2 NodeManagers
+22/08/15 13:12:41 INFO Configuration: resource-types.xml not found
+22/08/15 13:12:41 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+22/08/15 13:12:41 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (1792 MB per container)
+22/08/15 13:12:41 INFO Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+22/08/15 13:12:41 INFO Client: Setting up container launch context for our AM
+22/08/15 13:12:41 INFO Client: Setting up the launch environment for our AM container
+22/08/15 13:12:41 INFO Client: Preparing resources for our AM container
+22/08/15 13:12:41 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+22/08/15 13:12:45 INFO Client: Uploading resource file:/mnt/tmp/spark-3488ad0e-3c0b-497c-9b89-f0552ad43e58/__spark_libs__7452712527707896350.zip -> hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004/__spark_libs__7452712527707896350.zip
+22/08/15 13:12:48 INFO Client: Uploading resource file:/etc/hudi/conf.dist/hudi-defaults.conf -> hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004/hudi-defaults.conf
+22/08/15 13:12:48 INFO MetricsConfig: Loaded properties from hadoop-metrics2.properties
+22/08/15 13:12:48 INFO MetricsSystemImpl: Scheduled Metric snapshot period at 300 second(s).
+22/08/15 13:12:48 INFO MetricsSystemImpl: s3a-file-system metrics system started
+22/08/15 13:12:50 INFO Client: Uploading resource s3a://udacity-dataeng-emr/application/etl/etl.py -> hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004/etl.py
+22/08/15 13:12:50 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/pyspark.zip -> hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004/pyspark.zip
+22/08/15 13:12:50 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/py4j-0.10.9.3-src.zip -> hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004/py4j-0.10.9.3-src.zip
+22/08/15 13:12:50 INFO Client: Uploading resource file:/mnt/tmp/spark-3488ad0e-3c0b-497c-9b89-f0552ad43e58/__spark_conf__3592121382926852215.zip -> hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004/__spark_conf__.zip
+22/08/15 13:12:50 WARN DataStreamer: Caught exception
+java.lang.InterruptedException
+        at java.lang.Object.wait(Native Method)
+        at java.lang.Thread.join(Thread.java:1257)
+        at java.lang.Thread.join(Thread.java:1331)
+        at org.apache.hadoop.hdfs.DataStreamer.closeResponder(DataStreamer.java:986)
+        at org.apache.hadoop.hdfs.DataStreamer.closeInternal(DataStreamer.java:847)
+        at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:843)
+22/08/15 13:12:50 INFO SecurityManager: Changing view acls to: hadoop
+22/08/15 13:12:50 INFO SecurityManager: Changing modify acls to: hadoop
+22/08/15 13:12:50 INFO SecurityManager: Changing view acls groups to:
+22/08/15 13:12:50 INFO SecurityManager: Changing modify acls groups to:
+22/08/15 13:12:50 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(hadoop); groups with view permissions: Set(); users  with modify permissions: Set(hadoop); groups with modify permissions: Set()
+22/08/15 13:12:50 INFO Client: Submitting application application_1660568727526_0004 to ResourceManager
+22/08/15 13:12:51 INFO YarnClientImpl: Submitted application application_1660568727526_0004
+22/08/15 13:12:52 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:12:52 INFO Client:
          client token: N/A
          diagnostics: AM container is launched, waiting for AM container to Register with RM
          ApplicationMaster host: N/A
          ApplicationMaster RPC port: -1
          queue: default
-         start time: 1660560806753
+         start time: 1660569170919
          final status: UNDEFINED
-         tracking URL: http://ip-172-31-20-14.us-west-2.compute.internal:20888/proxy/application_1660559497527_0002/
+         tracking URL: http://ip-10-0-5-115.us-west-2.compute.internal:20888/proxy/application_1660568727526_0004/
          user: hadoop
-22/08/15 10:53:29 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:30 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:31 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:32 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:33 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:34 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:35 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:36 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:37 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:38 INFO Client: Application report for application_1660559497527_0002 (state: ACCEPTED)
-22/08/15 10:53:39 INFO Client: Application report for application_1660559497527_0002 (state: FAILED)
-22/08/15 10:53:39 INFO Client:
+22/08/15 13:12:53 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:12:54 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:12:55 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:12:56 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:12:57 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:12:58 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:12:59 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:13:00 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:13:01 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:13:02 INFO Client: Application report for application_1660568727526_0004 (state: ACCEPTED)
+22/08/15 13:13:03 INFO Client: Application report for application_1660568727526_0004 (state: FAILED)
+22/08/15 13:13:03 INFO Client:
          client token: N/A
-         diagnostics: Application application_1660559497527_0002 failed 2 times due to AM Container for appattempt_1660559497527_0002_000002 exited with  exitCode: 13
-Failing this attempt.Diagnostics: [2022-08-15 10:53:38.681]Exception from container-launch.
-Container id: container_1660559497527_0002_02_000001
+         diagnostics: Application application_1660568727526_0004 failed 2 times due to AM Container for appattempt_1660568727526_0004_000002 exited with  exitCode: 13
+Failing this attempt.Diagnostics: [2022-08-15 13:13:02.992]Exception from container-launch.
+Container id: container_1660568727526_0004_02_000001
 Exit code: 13
 
-[2022-08-15 10:53:38.684]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
+[2022-08-15 13:13:02.995]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
 Last 4096 bytes of prelaunch.err :
 Last 4096 bytes of stderr :
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for INT
-22/08/15 10:53:35 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 10:53:35 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 10:53:35 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:53:35 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:53:35 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 10:53:36 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0002_000002
-22/08/15 10:53:36 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 10:53:36 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 10:53:36 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 10:53:36 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 10:53:36 ERROR ApplicationMaster: Uncaught exception:
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for TERM
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for HUP
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for INT
+22/08/15 13:13:00 INFO SecurityManager: Changing view acls to: yarn,hadoop
+22/08/15 13:13:00 INFO SecurityManager: Changing modify acls to: yarn,hadoop
+22/08/15 13:13:00 INFO SecurityManager: Changing view acls groups to:
+22/08/15 13:13:00 INFO SecurityManager: Changing modify acls groups to:
+22/08/15 13:13:00 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
+22/08/15 13:13:01 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660568727526_0004_000002
+22/08/15 13:13:01 INFO ApplicationMaster: Starting the user application in a separate Thread
+22/08/15 13:13:01 INFO ApplicationMaster: Waiting for spark context initialization...
+22/08/15 13:13:02 ERROR ApplicationMaster: User application exited with status 1
+22/08/15 13:13:02 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
+22/08/15 13:13:02 ERROR ApplicationMaster: Uncaught exception:
 org.apache.spark.SparkException: Exception thrown in awaitResult:
         at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
         at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
@@ -688,27 +294,27 @@ Caused by: org.apache.spark.SparkUserAppException: User application exited with 
         at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
         at java.lang.reflect.Method.invoke(Method.java:498)
         at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 10:53:36 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002
-22/08/15 10:53:38 INFO ShutdownHookManager: Shutdown hook called
+22/08/15 13:13:02 INFO ApplicationMaster: Deleting staging directory hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004
+22/08/15 13:13:02 INFO ShutdownHookManager: Shutdown hook called
 
 
-[2022-08-15 10:53:38.684]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
+[2022-08-15 13:13:03.000]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
 Last 4096 bytes of prelaunch.err :
 Last 4096 bytes of stderr :
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for INT
-22/08/15 10:53:35 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 10:53:35 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 10:53:35 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:53:35 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:53:35 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 10:53:36 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0002_000002
-22/08/15 10:53:36 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 10:53:36 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 10:53:36 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 10:53:36 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 10:53:36 ERROR ApplicationMaster: Uncaught exception:
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for TERM
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for HUP
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for INT
+22/08/15 13:13:00 INFO SecurityManager: Changing view acls to: yarn,hadoop
+22/08/15 13:13:00 INFO SecurityManager: Changing modify acls to: yarn,hadoop
+22/08/15 13:13:00 INFO SecurityManager: Changing view acls groups to:
+22/08/15 13:13:00 INFO SecurityManager: Changing modify acls groups to:
+22/08/15 13:13:00 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
+22/08/15 13:13:01 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660568727526_0004_000002
+22/08/15 13:13:01 INFO ApplicationMaster: Starting the user application in a separate Thread
+22/08/15 13:13:01 INFO ApplicationMaster: Waiting for spark context initialization...
+22/08/15 13:13:02 ERROR ApplicationMaster: User application exited with status 1
+22/08/15 13:13:02 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
+22/08/15 13:13:02 ERROR ApplicationMaster: Uncaught exception:
 org.apache.spark.SparkException: Exception thrown in awaitResult:
         at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
         at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
@@ -728,41 +334,41 @@ Caused by: org.apache.spark.SparkUserAppException: User application exited with 
         at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
         at java.lang.reflect.Method.invoke(Method.java:498)
         at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 10:53:36 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002
-22/08/15 10:53:38 INFO ShutdownHookManager: Shutdown hook called
+22/08/15 13:13:02 INFO ApplicationMaster: Deleting staging directory hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004
+22/08/15 13:13:02 INFO ShutdownHookManager: Shutdown hook called
 
 
-For more detailed output, check the application tracking page: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0002 Then click on links to logs of each attempt.
+For more detailed output, check the application tracking page: http://ip-10-0-5-115.us-west-2.compute.internal:8088/cluster/app/application_1660568727526_0004 Then click on links to logs of each attempt.
 . Failing the application.
          ApplicationMaster host: N/A
          ApplicationMaster RPC port: -1
          queue: default
-         start time: 1660560806753
+         start time: 1660569170919
          final status: FAILED
-         tracking URL: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0002
+         tracking URL: http://ip-10-0-5-115.us-west-2.compute.internal:8088/cluster/app/application_1660568727526_0004
          user: hadoop
-22/08/15 10:53:39 ERROR Client: Application diagnostics message: Application application_1660559497527_0002 failed 2 times due to AM Container for appattempt_1660559497527_0002_000002 exited with  exitCode: 13
-Failing this attempt.Diagnostics: [2022-08-15 10:53:38.681]Exception from container-launch.
-Container id: container_1660559497527_0002_02_000001
+22/08/15 13:13:03 ERROR Client: Application diagnostics message: Application application_1660568727526_0004 failed 2 times due to AM Container for appattempt_1660568727526_0004_000002 exited with  exitCode: 13
+Failing this attempt.Diagnostics: [2022-08-15 13:13:02.992]Exception from container-launch.
+Container id: container_1660568727526_0004_02_000001
 Exit code: 13
 
-[2022-08-15 10:53:38.684]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
+[2022-08-15 13:13:02.995]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
 Last 4096 bytes of prelaunch.err :
 Last 4096 bytes of stderr :
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for INT
-22/08/15 10:53:35 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 10:53:35 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 10:53:35 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:53:35 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:53:35 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 10:53:36 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0002_000002
-22/08/15 10:53:36 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 10:53:36 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 10:53:36 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 10:53:36 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 10:53:36 ERROR ApplicationMaster: Uncaught exception:
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for TERM
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for HUP
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for INT
+22/08/15 13:13:00 INFO SecurityManager: Changing view acls to: yarn,hadoop
+22/08/15 13:13:00 INFO SecurityManager: Changing modify acls to: yarn,hadoop
+22/08/15 13:13:00 INFO SecurityManager: Changing view acls groups to:
+22/08/15 13:13:00 INFO SecurityManager: Changing modify acls groups to:
+22/08/15 13:13:00 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
+22/08/15 13:13:01 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660568727526_0004_000002
+22/08/15 13:13:01 INFO ApplicationMaster: Starting the user application in a separate Thread
+22/08/15 13:13:01 INFO ApplicationMaster: Waiting for spark context initialization...
+22/08/15 13:13:02 ERROR ApplicationMaster: User application exited with status 1
+22/08/15 13:13:02 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
+22/08/15 13:13:02 ERROR ApplicationMaster: Uncaught exception:
 org.apache.spark.SparkException: Exception thrown in awaitResult:
         at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
         at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
@@ -782,27 +388,27 @@ Caused by: org.apache.spark.SparkUserAppException: User application exited with 
         at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
         at java.lang.reflect.Method.invoke(Method.java:498)
         at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 10:53:36 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002
-22/08/15 10:53:38 INFO ShutdownHookManager: Shutdown hook called
+22/08/15 13:13:02 INFO ApplicationMaster: Deleting staging directory hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004
+22/08/15 13:13:02 INFO ShutdownHookManager: Shutdown hook called
 
 
-[2022-08-15 10:53:38.684]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
+[2022-08-15 13:13:03.000]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
 Last 4096 bytes of prelaunch.err :
 Last 4096 bytes of stderr :
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 10:53:34 INFO SignalUtils: Registering signal handler for INT
-22/08/15 10:53:35 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 10:53:35 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 10:53:35 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:53:35 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:53:35 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 10:53:36 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0002_000002
-22/08/15 10:53:36 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 10:53:36 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 10:53:36 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 10:53:36 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 10:53:36 ERROR ApplicationMaster: Uncaught exception:
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for TERM
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for HUP
+22/08/15 13:13:00 INFO SignalUtils: Registering signal handler for INT
+22/08/15 13:13:00 INFO SecurityManager: Changing view acls to: yarn,hadoop
+22/08/15 13:13:00 INFO SecurityManager: Changing modify acls to: yarn,hadoop
+22/08/15 13:13:00 INFO SecurityManager: Changing view acls groups to:
+22/08/15 13:13:00 INFO SecurityManager: Changing modify acls groups to:
+22/08/15 13:13:00 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
+22/08/15 13:13:01 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660568727526_0004_000002
+22/08/15 13:13:01 INFO ApplicationMaster: Starting the user application in a separate Thread
+22/08/15 13:13:01 INFO ApplicationMaster: Waiting for spark context initialization...
+22/08/15 13:13:02 ERROR ApplicationMaster: User application exited with status 1
+22/08/15 13:13:02 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
+22/08/15 13:13:02 ERROR ApplicationMaster: Uncaught exception:
 org.apache.spark.SparkException: Exception thrown in awaitResult:
         at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
         at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
@@ -822,13 +428,13 @@ Caused by: org.apache.spark.SparkUserAppException: User application exited with 
         at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
         at java.lang.reflect.Method.invoke(Method.java:498)
         at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 10:53:36 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0002
-22/08/15 10:53:38 INFO ShutdownHookManager: Shutdown hook called
+22/08/15 13:13:02 INFO ApplicationMaster: Deleting staging directory hdfs://ip-10-0-5-115.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660568727526_0004
+22/08/15 13:13:02 INFO ShutdownHookManager: Shutdown hook called
 
 
-For more detailed output, check the application tracking page: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0002 Then click on links to logs of each attempt.
+For more detailed output, check the application tracking page: http://ip-10-0-5-115.us-west-2.compute.internal:8088/cluster/app/application_1660568727526_0004 Then click on links to logs of each attempt.
 . Failing the application.
-Exception in thread "main" org.apache.spark.SparkException: Application application_1660559497527_0002 finished with failed status
+Exception in thread "main" org.apache.spark.SparkException: Application application_1660568727526_0004 finished with failed status
         at org.apache.spark.deploy.yarn.Client.run(Client.scala:1294)
         at org.apache.spark.deploy.yarn.YarnClusterApplication.start(Client.scala:1688)
         at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:1000)
@@ -838,463 +444,9 @@ Exception in thread "main" org.apache.spark.SparkException: Application applicat
         at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1089)
         at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1098)
         at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
-22/08/15 10:53:39 INFO ShutdownHookManager: Shutdown hook called
-22/08/15 10:53:39 INFO ShutdownHookManager: Deleting directory /mnt/tmp/spark-e47cef3d-4cac-421b-afd1-b669785f053a
-22/08/15 10:53:39 INFO ShutdownHookManager: Deleting directory /mnt/tmp/spark-de663818-fd38-4d8e-81c6-7db8c0423864
-22/08/15 10:53:39 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
-22/08/15 10:53:39 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
-22/08/15 10:53:39 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.
-(py310) [woox@woox datadiver-aws-emr]$ c
-(py310) [woox@woox datadiver-aws-emr]$ ./bin/ssh-cluster.sh
-Last login: Mon Aug 15 10:51:15 2022
-
-       __|  __|_  )
-       _|  (     /   Amazon Linux 2 AMI
-      ___|\___|___|
-
-https://aws.amazon.com/amazon-linux-2/
-16 package(s) needed for security, out of 32 available
-Run "sudo yum update" to apply all updates.
-
-EEEEEEEEEEEEEEEEEEEE MMMMMMMM           MMMMMMMM RRRRRRRRRRRRRRR
-E::::::::::::::::::E M:::::::M         M:::::::M R::::::::::::::R
-EE:::::EEEEEEEEE:::E M::::::::M       M::::::::M R:::::RRRRRR:::::R
-  E::::E       EEEEE M:::::::::M     M:::::::::M RR::::R      R::::R
-  E::::E             M::::::M:::M   M:::M::::::M   R:::R      R::::R
-  E:::::EEEEEEEEEE   M:::::M M:::M M:::M M:::::M   R:::RRRRRR:::::R
-  E::::::::::::::E   M:::::M  M:::M:::M  M:::::M   R:::::::::::RR
-  E:::::EEEEEEEEEE   M:::::M   M:::::M   M:::::M   R:::RRRRRR::::R
-  E::::E             M:::::M    M:::M    M:::::M   R:::R      R::::R
-  E::::E       EEEEE M:::::M     MMM     M:::::M   R:::R      R::::R
-EE:::::EEEEEEEE::::E M:::::M             M:::::M   R:::R      R::::R
-E::::::::::::::::::E M:::::M             M:::::M RR::::R      R::::R
-EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
-
-[hadoop@ip-172-31-20-14 ~]$ mkdir application/etl
-mkdir: cannot create directory ‘application/etl’: No such file or directory
-[hadoop@ip-172-31-20-14 ~]$ mkdir application
-[hadoop@ip-172-31-20-14 ~]$ export APP_DIR=$HOME/application
-[hadoop@ip-172-31-20-14 ~]$ spark-submit --verbose \
-> --master yarn \
-> --deploy-mode cluster \
-> "$APP_DIR/etl.py" \
-> --py-files \
-> "$APP_DIR/__init__.py" \
-> "$APP_DIR/config.py" \
-> "$APP_DIR/etl.cfg" \
-> "$APP_DIR/metadata.py"
-Using properties file: /usr/lib/spark/conf/spark-defaults.conf
-Adding default property: spark.sql.warehouse.dir=hdfs:///user/spark/warehouse
-Adding default property: spark.yarn.dist.files=/etc/hudi/conf/hudi-defaults.conf
-Adding default property: spark.sql.parquet.fs.optimized.committer.optimization-enabled=true
-Adding default property: spark.history.fs.logDirectory=hdfs:///var/log/spark/apps
-Adding default property: spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem=2
-Adding default property: spark.hadoop.mapreduce.output.fs.optimized.committer.enabled=true
-Adding default property: spark.eventLog.enabled=true
-Adding default property: spark.shuffle.service.enabled=true
-Adding default property: spark.driver.extraLibraryPath=/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
-Adding default property: spark.emr.default.executor.memory=4269M
-Adding default property: spark.yarn.historyServer.address=ip-172-31-20-14.us-west-2.compute.internal:18080
-Adding default property: spark.stage.attempt.ignoreOnDecommissionFetchFailure=true
-Adding default property: spark.driver.memory=2048M
-Adding default property: spark.files.fetchFailure.unRegisterOutputOnHost=true
-Adding default property: spark.executor.defaultJavaOptions=-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'
-Adding default property: spark.resourceManager.cleanupExpiredHost=true
-Adding default property: spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS=$(hostname -f)
-Adding default property: spark.sql.emr.internal.extensions=com.amazonaws.emr.spark.EmrSparkSessionExtensions
-Adding default property: spark.emr.default.executor.cores=4
-Adding default property: spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds=2000
-Adding default property: spark.master=yarn
-Adding default property: spark.sql.parquet.output.committer.class=com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter
-Adding default property: spark.driver.defaultJavaOptions=-XX:OnOutOfMemoryError='kill -9 %p'
-Adding default property: spark.blacklist.decommissioning.timeout=1h
-Adding default property: spark.executor.extraLibraryPath=/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
-Adding default property: spark.sql.hive.metastore.sharedPrefixes=com.amazonaws.services.dynamodbv2
-Adding default property: spark.executor.memory=4269M
-Adding default property: spark.driver.extraClassPath=/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
-Adding default property: spark.eventLog.dir=hdfs:///var/log/spark/apps
-Adding default property: spark.dynamicAllocation.enabled=true
-Adding default property: spark.executor.extraClassPath=/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
-Adding default property: spark.executor.cores=4
-Adding default property: spark.history.ui.port=18080
-Adding default property: spark.blacklist.decommissioning.enabled=true
-Adding default property: spark.decommissioning.timeout.threshold=20
-Adding default property: spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem=true
-Adding default property: spark.hadoop.yarn.timeline-service.enabled=false
-Adding default property: spark.yarn.executor.memoryOverheadFactor=0.1875
-Parsed arguments:
-  master                  yarn
-  deployMode              cluster
-  executorMemory          4269M
-  executorCores           4
-  totalExecutorCores      null
-  propertiesFile          /usr/lib/spark/conf/spark-defaults.conf
-  driverMemory            2048M
-  driverCores             null
-  driverExtraClassPath    /usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar
-  driverExtraLibraryPath  /usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native
-  driverExtraJavaOptions  null
-  supervise               false
-  queue                   null
-  numExecutors            null
-  files                   null
-  pyFiles                 null
-  archives                null
-  mainClass               null
-  primaryResource         file:/home/hadoop/application/etl.py
-  name                    etl.py
-  childArgs               [--py-files /home/hadoop/application/__init__.py /home/hadoop/application/config.py /home/hadoop/application/etl.cfg /home/hadoop/application/metadata.py]
-  jars                    null
-  packages                null
-  packagesExclusions      null
-  repositories            null
-  verbose                 true
-
-Spark properties used, including those specified through
- --conf and those from the properties file /usr/lib/spark/conf/spark-defaults.conf:
-  (spark.sql.emr.internal.extensions,com.amazonaws.emr.spark.EmrSparkSessionExtensions)
-  (spark.blacklist.decommissioning.timeout,1h)
-  (spark.executor.defaultJavaOptions,-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p')
-  (spark.yarn.executor.memoryOverheadFactor,0.1875)
-  (spark.executor.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-  (spark.blacklist.decommissioning.enabled,true)
-  (spark.hadoop.yarn.timeline-service.enabled,false)
-  (spark.driver.memory,2048M)
-  (spark.executor.memory,4269M)
-  (spark.sql.warehouse.dir,hdfs:///user/spark/warehouse)
-  (spark.sql.parquet.fs.optimized.committer.optimization-enabled,true)
-  (spark.driver.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-  (spark.yarn.historyServer.address,ip-172-31-20-14.us-west-2.compute.internal:18080)
-  (spark.eventLog.enabled,true)
-  (spark.yarn.dist.files,/etc/hudi/conf/hudi-defaults.conf)
-  (spark.files.fetchFailure.unRegisterOutputOnHost,true)
-  (spark.history.ui.port,18080)
-  (spark.stage.attempt.ignoreOnDecommissionFetchFailure,true)
-  (spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds,2000)
-  (spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS,$(hostname -f))
-  (spark.driver.defaultJavaOptions,-XX:OnOutOfMemoryError='kill -9 %p')
-  (spark.resourceManager.cleanupExpiredHost,true)
-  (spark.shuffle.service.enabled,true)
-  (spark.history.fs.logDirectory,hdfs:///var/log/spark/apps)
-  (spark.emr.default.executor.cores,4)
-  (spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem,2)
-  (spark.hadoop.mapreduce.output.fs.optimized.committer.enabled,true)
-  (spark.executor.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-  (spark.sql.hive.metastore.sharedPrefixes,com.amazonaws.services.dynamodbv2)
-  (spark.eventLog.dir,hdfs:///var/log/spark/apps)
-  (spark.master,yarn)
-  (spark.emr.default.executor.memory,4269M)
-  (spark.dynamicAllocation.enabled,true)
-  (spark.sql.parquet.output.committer.class,com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter)
-  (spark.executor.cores,4)
-  (spark.decommissioning.timeout.threshold,20)
-  (spark.driver.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-  (spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem,true)
-
-
-Main class:
-org.apache.spark.deploy.yarn.YarnClusterApplication
-Arguments:
---primary-py-file
-file:/home/hadoop/application/etl.py
---class
-org.apache.spark.deploy.PythonRunner
---arg
---py-files
---arg
-/home/hadoop/application/__init__.py
---arg
-/home/hadoop/application/config.py
---arg
-/home/hadoop/application/etl.cfg
---arg
-/home/hadoop/application/metadata.py
-Spark config:
-(spark.sql.warehouse.dir,hdfs:///user/spark/warehouse)
-(spark.yarn.dist.files,file:/etc/hudi/conf.dist/hudi-defaults.conf)
-(spark.sql.parquet.fs.optimized.committer.optimization-enabled,true)
-(spark.history.fs.logDirectory,hdfs:///var/log/spark/apps)
-(spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem,2)
-(spark.hadoop.mapreduce.output.fs.optimized.committer.enabled,true)
-(spark.eventLog.enabled,true)
-(spark.shuffle.service.enabled,true)
-(spark.driver.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-(spark.emr.default.executor.memory,4269M)
-(spark.yarn.historyServer.address,ip-172-31-20-14.us-west-2.compute.internal:18080)
-(spark.stage.attempt.ignoreOnDecommissionFetchFailure,true)
-(spark.app.name,etl.py)
-(spark.driver.memory,2048M)
-(spark.files.fetchFailure.unRegisterOutputOnHost,true)
-(spark.submit.pyFiles,)
-(spark.executor.defaultJavaOptions,-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p')
-(spark.resourceManager.cleanupExpiredHost,true)
-(spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS,$(hostname -f))
-(spark.sql.emr.internal.extensions,com.amazonaws.emr.spark.EmrSparkSessionExtensions)
-(spark.emr.default.executor.cores,4)
-(spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds,2000)
-(spark.submit.deployMode,cluster)
-(spark.master,yarn)
-(spark.sql.parquet.output.committer.class,com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter)
-(spark.driver.defaultJavaOptions,-XX:OnOutOfMemoryError='kill -9 %p')
-(spark.blacklist.decommissioning.timeout,1h)
-(spark.executor.extraLibraryPath,/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native)
-(spark.sql.hive.metastore.sharedPrefixes,com.amazonaws.services.dynamodbv2)
-(spark.executor.memory,4269M)
-(spark.driver.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-(spark.eventLog.dir,hdfs:///var/log/spark/apps)
-(spark.dynamicAllocation.enabled,true)
-(spark.executor.extraClassPath,/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar)
-(spark.executor.cores,4)
-(spark.history.ui.port,18080)
-(spark.yarn.isPython,true)
-(spark.blacklist.decommissioning.enabled,true)
-(spark.decommissioning.timeout.threshold,20)
-(spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem,true)
-(spark.hadoop.yarn.timeline-service.enabled,false)
-(spark.yarn.executor.memoryOverheadFactor,0.1875)
-Classpath elements:
-
-
-
-22/08/15 10:59:46 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-22/08/15 10:59:46 INFO RMProxy: Connecting to ResourceManager at ip-172-31-20-14.us-west-2.compute.internal/172.31.20.14:8032
-22/08/15 10:59:47 INFO Client: Requesting a new application from cluster with 1 NodeManagers
-22/08/15 10:59:47 INFO Configuration: resource-types.xml not found
-22/08/15 10:59:47 INFO ResourceUtils: Unable to find 'resource-types.xml'.
-22/08/15 10:59:47 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (6144 MB per container)
-22/08/15 10:59:47 INFO Client: Will allocate AM container, with 2432 MB memory including 384 MB overhead
-22/08/15 10:59:47 INFO Client: Setting up container launch context for our AM
-22/08/15 10:59:47 INFO Client: Setting up the launch environment for our AM container
-22/08/15 10:59:48 INFO Client: Preparing resources for our AM container
-22/08/15 10:59:48 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
-22/08/15 10:59:51 INFO Client: Uploading resource file:/mnt/tmp/spark-d057373e-25bc-479e-82a9-94361788a39b/__spark_libs__8837122890143397689.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003/__spark_libs__8837122890143397689.zip
-22/08/15 10:59:55 INFO Client: Uploading resource file:/etc/hudi/conf.dist/hudi-defaults.conf -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003/hudi-defaults.conf
-22/08/15 10:59:55 INFO Client: Uploading resource file:/home/hadoop/application/etl.py -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003/etl.py
-22/08/15 10:59:55 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/pyspark.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003/pyspark.zip
-22/08/15 10:59:55 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/py4j-0.10.9.3-src.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003/py4j-0.10.9.3-src.zip
-22/08/15 10:59:55 INFO Client: Uploading resource file:/mnt/tmp/spark-d057373e-25bc-479e-82a9-94361788a39b/__spark_conf__1697362645945890817.zip -> hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003/__spark_conf__.zip
-22/08/15 10:59:55 INFO SecurityManager: Changing view acls to: hadoop
-22/08/15 10:59:55 INFO SecurityManager: Changing modify acls to: hadoop
-22/08/15 10:59:55 INFO SecurityManager: Changing view acls groups to:
-22/08/15 10:59:55 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 10:59:55 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(hadoop); groups with view permissions: Set(); users  with modify permissions: Set(hadoop); groups with modify permissions: Set()
-22/08/15 10:59:55 INFO Client: Submitting application application_1660559497527_0003 to ResourceManager
-22/08/15 10:59:55 INFO YarnClientImpl: Submitted application application_1660559497527_0003
-22/08/15 10:59:56 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 10:59:56 INFO Client:
-         client token: N/A
-         diagnostics: AM container is launched, waiting for AM container to Register with RM
-         ApplicationMaster host: N/A
-         ApplicationMaster RPC port: -1
-         queue: default
-         start time: 1660561195807
-         final status: UNDEFINED
-         tracking URL: http://ip-172-31-20-14.us-west-2.compute.internal:20888/proxy/application_1660559497527_0003/
-         user: hadoop
-22/08/15 10:59:57 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 10:59:58 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 10:59:59 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 11:00:00 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 11:00:01 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 11:00:02 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 11:00:03 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 11:00:04 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 11:00:05 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 11:00:06 INFO Client: Application report for application_1660559497527_0003 (state: ACCEPTED)
-22/08/15 11:00:07 INFO Client: Application report for application_1660559497527_0003 (state: FAILED)
-22/08/15 11:00:07 INFO Client:
-         client token: N/A
-         diagnostics: Application application_1660559497527_0003 failed 2 times due to AM Container for appattempt_1660559497527_0003_000002 exited with  exitCode: 13
-Failing this attempt.Diagnostics: [2022-08-15 11:00:07.516]Exception from container-launch.
-Container id: container_1660559497527_0003_02_000001
-Exit code: 13
-
-[2022-08-15 11:00:07.519]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
-Last 4096 bytes of prelaunch.err :
-Last 4096 bytes of stderr :
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for INT
-22/08/15 11:00:04 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 11:00:04 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 11:00:04 INFO SecurityManager: Changing view acls groups to:
-22/08/15 11:00:04 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 11:00:04 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 11:00:04 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0003_000002
-22/08/15 11:00:05 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 11:00:05 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 11:00:05 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 11:00:05 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 11:00:05 ERROR ApplicationMaster: Uncaught exception:
-org.apache.spark.SparkException: Exception thrown in awaitResult:
-        at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.run(ApplicationMaster.scala:276)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:916)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:915)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at javax.security.auth.Subject.doAs(Subject.java:422)
-        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$.main(ApplicationMaster.scala:915)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.main(ApplicationMaster.scala)
-Caused by: org.apache.spark.SparkUserAppException: User application exited with 1
-        at org.apache.spark.deploy.PythonRunner$.main(PythonRunner.scala:111)
-        at org.apache.spark.deploy.PythonRunner.main(PythonRunner.scala)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 11:00:05 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003
-22/08/15 11:00:06 INFO ShutdownHookManager: Shutdown hook called
-
-
-[2022-08-15 11:00:07.519]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
-Last 4096 bytes of prelaunch.err :
-Last 4096 bytes of stderr :
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for INT
-22/08/15 11:00:04 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 11:00:04 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 11:00:04 INFO SecurityManager: Changing view acls groups to:
-22/08/15 11:00:04 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 11:00:04 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 11:00:04 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0003_000002
-22/08/15 11:00:05 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 11:00:05 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 11:00:05 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 11:00:05 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 11:00:05 ERROR ApplicationMaster: Uncaught exception:
-org.apache.spark.SparkException: Exception thrown in awaitResult:
-        at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.run(ApplicationMaster.scala:276)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:916)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:915)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at javax.security.auth.Subject.doAs(Subject.java:422)
-        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$.main(ApplicationMaster.scala:915)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.main(ApplicationMaster.scala)
-Caused by: org.apache.spark.SparkUserAppException: User application exited with 1
-        at org.apache.spark.deploy.PythonRunner$.main(PythonRunner.scala:111)
-        at org.apache.spark.deploy.PythonRunner.main(PythonRunner.scala)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 11:00:05 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003
-22/08/15 11:00:06 INFO ShutdownHookManager: Shutdown hook called
-
-
-For more detailed output, check the application tracking page: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0003 Then click on links to logs of each attempt.
-. Failing the application.
-         ApplicationMaster host: N/A
-         ApplicationMaster RPC port: -1
-         queue: default
-         start time: 1660561195807
-         final status: FAILED
-         tracking URL: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0003
-         user: hadoop
-22/08/15 11:00:07 ERROR Client: Application diagnostics message: Application application_1660559497527_0003 failed 2 times due to AM Container for appattempt_1660559497527_0003_000002 exited with  exitCode: 13
-Failing this attempt.Diagnostics: [2022-08-15 11:00:07.516]Exception from container-launch.
-Container id: container_1660559497527_0003_02_000001
-Exit code: 13
-
-[2022-08-15 11:00:07.519]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
-Last 4096 bytes of prelaunch.err :
-Last 4096 bytes of stderr :
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for INT
-22/08/15 11:00:04 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 11:00:04 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 11:00:04 INFO SecurityManager: Changing view acls groups to:
-22/08/15 11:00:04 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 11:00:04 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 11:00:04 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0003_000002
-22/08/15 11:00:05 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 11:00:05 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 11:00:05 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 11:00:05 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 11:00:05 ERROR ApplicationMaster: Uncaught exception:
-org.apache.spark.SparkException: Exception thrown in awaitResult:
-        at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.run(ApplicationMaster.scala:276)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:916)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:915)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at javax.security.auth.Subject.doAs(Subject.java:422)
-        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$.main(ApplicationMaster.scala:915)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.main(ApplicationMaster.scala)
-Caused by: org.apache.spark.SparkUserAppException: User application exited with 1
-        at org.apache.spark.deploy.PythonRunner$.main(PythonRunner.scala:111)
-        at org.apache.spark.deploy.PythonRunner.main(PythonRunner.scala)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 11:00:05 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003
-22/08/15 11:00:06 INFO ShutdownHookManager: Shutdown hook called
-
-
-[2022-08-15 11:00:07.519]Container exited with a non-zero exit code 13. Error file: prelaunch.err.
-Last 4096 bytes of prelaunch.err :
-Last 4096 bytes of stderr :
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for TERM
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for HUP
-22/08/15 11:00:03 INFO SignalUtils: Registering signal handler for INT
-22/08/15 11:00:04 INFO SecurityManager: Changing view acls to: yarn,hadoop
-22/08/15 11:00:04 INFO SecurityManager: Changing modify acls to: yarn,hadoop
-22/08/15 11:00:04 INFO SecurityManager: Changing view acls groups to:
-22/08/15 11:00:04 INFO SecurityManager: Changing modify acls groups to:
-22/08/15 11:00:04 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(yarn, hadoop); groups with view permissions: Set(); users  with modify permissions: Set(yarn, hadoop); groups with modify permissions: Set()
-22/08/15 11:00:04 INFO ApplicationMaster: ApplicationAttemptId: appattempt_1660559497527_0003_000002
-22/08/15 11:00:05 INFO ApplicationMaster: Starting the user application in a separate Thread
-22/08/15 11:00:05 INFO ApplicationMaster: Waiting for spark context initialization...
-22/08/15 11:00:05 ERROR ApplicationMaster: User application exited with status 1
-22/08/15 11:00:05 INFO ApplicationMaster: Final app status: FAILED, exitCode: 13, (reason: User application exited with status 1)
-22/08/15 11:00:05 ERROR ApplicationMaster: Uncaught exception:
-org.apache.spark.SparkException: Exception thrown in awaitResult:
-        at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:301)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.runDriver(ApplicationMaster.scala:512)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.run(ApplicationMaster.scala:276)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:916)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$3.run(ApplicationMaster.scala:915)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at javax.security.auth.Subject.doAs(Subject.java:422)
-        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$.main(ApplicationMaster.scala:915)
-        at org.apache.spark.deploy.yarn.ApplicationMaster.main(ApplicationMaster.scala)
-Caused by: org.apache.spark.SparkUserAppException: User application exited with 1
-        at org.apache.spark.deploy.PythonRunner$.main(PythonRunner.scala:111)
-        at org.apache.spark.deploy.PythonRunner.main(PythonRunner.scala)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:740)
-22/08/15 11:00:05 INFO ApplicationMaster: Deleting staging directory hdfs://ip-172-31-20-14.us-west-2.compute.internal:8020/user/hadoop/.sparkStaging/application_1660559497527_0003
-22/08/15 11:00:06 INFO ShutdownHookManager: Shutdown hook called
-
-
-For more detailed output, check the application tracking page: http://ip-172-31-20-14.us-west-2.compute.internal:8088/cluster/app/application_1660559497527_0003 Then click on links to logs of each attempt.
-. Failing the application.
-Exception in thread "main" org.apache.spark.SparkException: Application application_1660559497527_0003 finished with failed status
-        at org.apache.spark.deploy.yarn.Client.run(Client.scala:1294)
-        at org.apache.spark.deploy.yarn.YarnClusterApplication.start(Client.scala:1688)
-        at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:1000)
-        at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:180)
-        at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:203)
-        at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:90)
-        at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1089)
-        at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1098)
-        at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
-22/08/15 11:00:07 INFO ShutdownHookManager: Shutdown hook called
-22/08/15 11:00:07 INFO ShutdownHookManager: Deleting directory /mnt/tmp/spark-d057373e-25bc-479e-82a9-94361788a39b
-22/08/15 11:00:07 INFO ShutdownHookManager: Deleting directory /mnt/tmp/spark-2b5dacaf-9e0d-4adb-aaa0-032821f81bdc
+22/08/15 13:13:03 INFO ShutdownHookManager: Shutdown hook called
+22/08/15 13:13:03 INFO ShutdownHookManager: Deleting directory /mnt/tmp/spark-0b232757-7992-4480-a30a-e54dc3c8d9a9
+22/08/15 13:13:03 INFO ShutdownHookManager: Deleting directory /mnt/tmp/spark-3488ad0e-3c0b-497c-9b89-f0552ad43e58
+22/08/15 13:13:03 INFO MetricsSystemImpl: Stopping s3a-file-system metrics system...
+22/08/15 13:13:03 INFO MetricsSystemImpl: s3a-file-system metrics system stopped.
+22/08/15 13:13:03 INFO MetricsSystemImpl: s3a-file-system metrics system shutdown complete.

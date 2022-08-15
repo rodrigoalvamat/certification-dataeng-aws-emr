@@ -22,4 +22,4 @@ ssh -i "$KEYPAIR" "hadoop@$DNS" spark-submit --verbose \
              --master yarn \
              --deploy-mode cluster \
              "$APP_DIR/etl.py" \
-             --py-files "$APP_DIR/__init__.py","$APP_DIR/config.py","$APP_DIR/etl.cfg","$APP_DIR/metadata.py"
+             --py-files "$APP_DIR/__init__.py,$APP_DIR/config.py,$APP_DIR/etl.cfg,$APP_DIR/metadata.py"
