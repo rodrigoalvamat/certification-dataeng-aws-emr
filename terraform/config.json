@@ -1,9 +1,38 @@
 [
   {
-    "Classification": "yarn-site",
+    "Classification": "spark-env",
+    "Properties": {},
+    "Configurations": [
+      {
+        "Classification": "export",
+        "Properties": {
+          "SPARK_HOME": "/usr/lib/spark",
+          "PYSPARK_PYTHON": "/usr/bin/python3",
+          "PYSPARK_DRIVER_PYTHON": "/usr/bin/python3"
+        }
+      }
+    ]
+  },
+  {
+    "Classification": "spark-hive-site",
     "Properties": {
-      "yarn.nodemanager.vmem-check-enabled": "false",
-      "yarn.nodemanager.pmem-check-enabled": "false"
+      "hive.metastore.client.factory.class": "com.amazonaws.glue.catalog.metastore.AWSGlueDataCatalogHiveClientFactory"
+    }
+  },
+  {
+    "Classification": "spark-defaults",
+    "Properties": {
+      "spark.dynamicAllocation.enabled": "true",
+      "spark.shuffle.service.enabled": "true",
+      "spark.submit.deployMode": "cluster",
+      "spark.speculation": "false",
+      "spark.sql.adaptive.enabled": "true",
+      "spark.serializer": "org.apache.spark.serializer.KryoSerializer",
+      "spark.driver.extraJavaOptions": "-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'",
+      "spark.storage.level": "MEMORY_AND_DISK_SER",
+      "spark.rdd.compress": "true",
+      "spark.shuffle.compress": "true",
+      "spark.shuffle.spill.compress": "true"
     }
   },
   {
@@ -13,51 +42,9 @@
     }
   },
   {
-    "Classification": "spark-defaults",
+    "Classification": "emrfs-site",
     "Properties": {
-      "spark.network.timeout": "800s",
-      "spark.executor.heartbeatInterval": "60s",
-      "spark.dynamicAllocation.enabled": "true",
-      "spark.memory.fraction": "0.80",
-      "spark.memory.storageFraction": "0.30",
-      "spark.executor.extraJavaOptions": "-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'",
-      "spark.driver.extraJavaOptions": "-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'",
-      "spark.yarn.scheduler.reporterThread.maxFailures": "5",
-      "spark.storage.level": "MEMORY_AND_DISK_SER",
-      "spark.rdd.compress": "true",
-      "spark.shuffle.compress": "true",
-      "spark.shuffle.spill.compress": "true"
+      "fs.s3.maxConnections": "1000"
     }
-  },
-  {
-    "Classification": "mapred-site",
-    "Properties": {
-      "mapreduce.map.output.compress": "true"
-    }
-  },
-  {
-    "Classification": "hadoop-env",
-    "Configurations": [
-      {
-        "Classification": "export",
-        "Configurations": [],
-        "Properties": {
-          "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
-        }
-      }
-    ],
-    "Properties": {}
-  },
-  {
-    "Classification": "spark-env",
-    "Configurations": [
-      {
-        "Classification": "export",
-        "Properties": {
-          "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
-        }
-      }
-    ],
-    "Properties": {}
   }
 ]

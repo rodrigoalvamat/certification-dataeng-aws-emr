@@ -1,3 +1,11 @@
+locals {
+  init_file     = "s3a://${var.s3_bucket}/${var.s3_app_files.target}/__init__.py"
+  config_file   = "s3a://${var.s3_bucket}/${var.s3_app_files.target}/config.py"
+  cfg_file      = "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl.cfg"
+  etl_file      = "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl.py"
+  metadata_file = "s3a://${var.s3_bucket}/${var.s3_app_files.target}/metadata.py"
+}
+
 resource "aws_emr_cluster" "cluster" {
   name = "${var.namespace}-${var.project}-${var.stage}-emr"
 
@@ -7,7 +15,7 @@ resource "aws_emr_cluster" "cluster" {
 
   termination_protection            = false
   keep_job_flow_alive_when_no_steps = true
-  //configurations_json               = file("config.json")
+  configurations_json               = file("config.json")
   log_uri                           = "s3://${var.s3_bucket}/${var.s3_log_uri}"
 
   ec2_attributes {
@@ -35,7 +43,6 @@ resource "aws_emr_cluster" "cluster" {
   }
   */
 
-  /*
   step {
     action_on_failure = "CONTINUE"
     name              = "Spark ETL Pipeline Script"
@@ -44,15 +51,13 @@ resource "aws_emr_cluster" "cluster" {
       jar  = "command-runner.jar"
       args = [
         "spark-submit",
-        //"--master", "yarn",
-        //"--deploy-mode", "cluster",
+        "--master", "yarn",
+        "--deploy-mode", "cluster",
         //"--conf", "spark.dynamicAllocation.enabled=true",
         //"--conf", "spark.shuffle.service.enabled=true",
-        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl.py",
+        local.etl_file,
         "--py-files",
-        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/config.py",
-        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl.cfg",
-        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/metadata.py",
+        "${local.init_file},${local.config_file},${local.cfg_file},${local.metadata_file}"
       ]
     }
   }
@@ -60,7 +65,6 @@ resource "aws_emr_cluster" "cluster" {
   lifecycle {
     ignore_changes = [step]
   }
-  */
 
   tags = merge(local.common_tags, { category = "processing", resource = "spark" })
 }

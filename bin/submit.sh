@@ -17,18 +17,9 @@ source <(grep = "$PROJECT_DIR"/emr.cfg)
 # get the full path of the script and its directory
 APP_DIR="s3a://udacity-dataeng-emr/application/etl"
 
-#--conf spark.dynamicAllocation.enabled=true \
-#--conf spark.shuffle.service.enabled=true \
-#--conf spark.yarn.submit.waitAppCompletion=false \
-#--conf spark.driver.memoryOverhead=512 \
-#--conf spark.executor.memoryOverhead=512 \
 
 ssh -i "$KEYPAIR" "hadoop@$DNS" spark-submit --verbose \
              --master yarn \
              --deploy-mode cluster \
              "$APP_DIR/etl.py" \
-             --py-files \
-             "$APP_DIR/__init__.py" \
-             "$APP_DIR/config.py" \
-             "$APP_DIR/etl.cfg" \
-             "$APP_DIR/metadata.py"
+             --py-files "$APP_DIR/__init__.py","$APP_DIR/config.py","$APP_DIR/etl.cfg","$APP_DIR/metadata.py"
