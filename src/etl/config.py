@@ -1,7 +1,5 @@
-"""Defines a Config class to read the AWS EMR configuration from emr.cfg file.
+"""Defines a Config class to read the AWS EMR configuration from etl.cfg file."""
 
-Check the emr.cfg.template file configuration sections and options.
-"""
 # sys libs
 import os
 # config libs
@@ -15,7 +13,7 @@ INI_PATH = os.path.join(DIR, 'etl.cfg')
 class Config:
     """This class defines a wrapper for ConfigParser.
 
-    Use the emr.cfg.template file as a reference to configure
+    Use the etl.cfg file as a reference to configure
     the application according to your AWS account settings.
 
     Usage example:
@@ -25,7 +23,7 @@ class Config:
     """
 
     def __init__(self, local=False):
-        """Creates a Config object from emr.cfg file.
+        """Creates a Config object from etl.cfg file.
 
         Config values will be UTF-8 encoded.
 
@@ -40,10 +38,10 @@ class Config:
         """Reads a config option value from a section.
 
         Retrieves an option value pertaining to the given section
-        from the emr.cfg file.
+        from the etl.cfg file.
 
         Args:
-            section: The emr.cfg file section name.
+            section: The etl.cfg file section name.
               E.g. EMR
             option: The section config option name.
               E.g. CLUSTER_ID

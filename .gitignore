@@ -8,3 +8,6 @@ terraform.tfstate.backup
 
 # python 
 __pycache__
+
+# key
+aws.cfg

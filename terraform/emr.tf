@@ -1,7 +1,5 @@
-// Creates EMR cluster
-resource "aws_emr_cluster" "emr_cluster" {
-  name       = "${var.namespace}-${var.project}-${var.stage}-emr"
-  depends_on = [aws_key_pair.emr_key_pair, module.vpc, aws_iam_instance_profile.iam_instance_profile_spark]
+resource "aws_emr_cluster" "cluster" {
+  name = "${var.namespace}-${var.project}-${var.stage}-emr"
 
   release_label = var.emr_release
   applications  = var.emr_applications
@@ -9,7 +7,7 @@ resource "aws_emr_cluster" "emr_cluster" {
 
   termination_protection            = false
   keep_job_flow_alive_when_no_steps = true
-  configurations_json               = file("configurations.json")
+  //configurations_json               = file("config.json")
   log_uri                           = "s3://${var.s3_bucket}/${var.s3_log_uri}"
 
   ec2_attributes {
@@ -31,12 +29,13 @@ resource "aws_emr_cluster" "emr_cluster" {
 
   /*
   bootstrap_action {
-    path = "s3://${var.s3_bucket}/${var.emr_bootstrap.key}"
-    name = var.emr_bootstrap.name
-    args = var.emr_bootstrap.args
+    path = "s3://elasticmapreduce/bootstrap-actions/run-if"
+    name = "runif"
+    args = ["instance.isMaster=true", "echo running on master node"]
   }
   */
 
+  /*
   step {
     action_on_failure = "CONTINUE"
     name              = "Spark ETL Pipeline Script"
@@ -45,14 +44,15 @@ resource "aws_emr_cluster" "emr_cluster" {
       jar  = "command-runner.jar"
       args = [
         "spark-submit",
-        "--master", "yarn",
-        "--deploy-mode", "cluster",
-        "--conf", "spark.dynamicAllocation.enabled=true",
-        "--conf", "spark.shuffle.service.enabled=true",
-        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl/etl.py",
+        //"--master", "yarn",
+        //"--deploy-mode", "cluster",
+        //"--conf", "spark.dynamicAllocation.enabled=true",
+        //"--conf", "spark.shuffle.service.enabled=true",
+        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl.py",
         "--py-files",
-        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl/config.py",
-        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl/metadata.py",
+        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/config.py",
+        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/etl.cfg",
+        "s3a://${var.s3_bucket}/${var.s3_app_files.target}/metadata.py",
       ]
     }
   }
@@ -60,6 +60,7 @@ resource "aws_emr_cluster" "emr_cluster" {
   lifecycle {
     ignore_changes = [step]
   }
+  */
 
   tags = merge(local.common_tags, { category = "processing", resource = "spark" })
 }

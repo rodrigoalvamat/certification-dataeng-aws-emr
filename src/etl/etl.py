@@ -10,9 +10,9 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, concat, concat_ws, from_unixtime, substring, to_date
 from pyspark.sql.functions import dayofmonth, dayofweek, hour, month, weekofyear, year
 # config libs
-from src.etl.config import Config
+from etl.config import Config
 # metadata libs
-from src.etl.metadata import columns
+from etl.metadata import columns
 
 
 class ETLPipeline:
@@ -42,9 +42,9 @@ class ETLPipeline:
         configure the jar dependencies packages."""
         spark = SparkSession.builder \
             .appName(self.config.get('SPARK', 'APP_NAME')) \
-            .config('spark.jars.packages', self.config.get('SPARK', 'HADOOP_JAR')) \
             .getOrCreate()
 
+        # .config('spark.jars.packages', self.config.get('SPARK', 'HADOOP_JAR')) \
         return spark
 
     def __repartition(self, source, target):
@@ -77,10 +77,35 @@ class ETLPipeline:
 
     @staticmethod
     def __transform_table(data, json_columns, table_columns, duplicates=None):
+        """Renames all columns of a DataFrame and drop duplicate values
+        for the given list of columns with duplicates.
+
+        Args:
+            data: The table DataFrame
+            json_columns: Column names from spark infer schema.
+            table_columns: Column names to write to the parquet file.
+            duplicates: List of columns to drop duplicate values.
+
+        Returns:
+            The transformed table DataFrame.
+        """
         return data.select(json_columns).toDF(*table_columns).drop_duplicates(duplicates)
 
     @staticmethod
     def __transform_time(data, json_columns, table_columns, duplicates=None):
+        """Transforms the unix epoch timestamp into a unique time identifier
+        and add columns - hour, day, week, month, year and weekday - to the
+        table DataFrame.
+
+        Args:
+            data: The table DataFrame
+            json_columns: Column names from spark infer schema.
+            table_columns: Column names to write to the parquet file.
+            duplicates: List of columns to drop duplicate values.
+
+        Returns:
+            The transformed table DataFrame.
+        """
         # @formatter:off
         time = data.select(json_columns) \
             .withColumn('start_time', concat_ws('.',
@@ -100,6 +125,19 @@ class ETLPipeline:
 
     @staticmethod
     def __transform_songplays(log_data, song_data, json_columns, table_columns):
+        """Join the log_data and song_data DataFrames and transforms
+        the unix epoch timestamp into a unique time identifier that
+        matches the time table.
+
+        Args:
+            log_data: The DataFrame with songplays data.
+            song_data: The DataFrame with songs data.
+            json_columns: Column names from spark infer schema.
+            table_columns: Column names to write to the parquet file.
+
+        Returns:
+            The transformed table DataFrame.
+        """
         join_conditions = [
             (col('sp.song') == col('so.title')) &
             (col('sp.artist') == col('so.artist_name')) &
@@ -108,45 +146,48 @@ class ETLPipeline:
         # @formatter:off
         songplays = log_data.select(json_columns).alias('sp') \
             .join(song_data.alias('so'), join_conditions) \
-            .withColumn('songplay_id', concat(col('userId'),
-                                              col('sessionId').cast('string'),
+            .withColumnRenamed('userAgent', 'user_agent') \
+            .withColumnRenamed('sessionId', 'session_id') \
+            .withColumnRenamed('userId', 'user_id') \
+            .withColumn('songplay_id', concat(col('user_id'),
+                                              col('session_id').cast('string'),
                                               col('itemInSession').cast('string'))) \
             .withColumn('start_time', concat_ws('.',
                                                 from_unixtime((col('ts') / 1000), 'yyyy-MM-dd HH:mm:ss'),
                                                 substring(col('ts'), -3, 3))) \
-            .withColumnRenamed('userAgent', 'user_agent') \
-            .withColumnRenamed('sessionId', 'session_id') \
-            .withColumnRenamed('userId', 'user_id') \
+            .withColumn('date', to_date('start_time')) \
+            .withColumn('month', month('date')) \
+            .withColumn('year', year('date')) \
             .select(table_columns)
         # @formatter:on
         return songplays
 
     def __transform(self, log_data, song_data):
-        print('INFO: Transform artists table...')
+        print('INFO: Transform artists table.')
         artists = self.__transform_table(data=song_data,
                                          json_columns=columns['artists']['json'],
                                          table_columns=columns['artists']['table'],
                                          duplicates=['artist_id'])
 
-        print('INFO: Transform songs table...')
+        print('INFO: Transform songs table.')
         songs = self.__transform_table(data=song_data,
                                        json_columns=columns['songs']['json'],
                                        table_columns=columns['songs']['table'],
                                        duplicates=['song_id'])
 
-        print('INFO: Transform users table...')
+        print('INFO: Transform users table.')
         users = self.__transform_table(data=log_data,
                                        json_columns=columns['users']['json'],
                                        table_columns=columns['users']['table'],
                                        duplicates=['user_id'])
 
-        print('INFO: Transform time table...')
+        print('INFO: Transform time table.')
         time = self.__transform_time(data=log_data,
                                      json_columns=columns['time']['json'],
                                      table_columns=columns['time']['table'],
                                      duplicates=['start_time'])
 
-        print('INFO: Transform songplays table...')
+        print('INFO: Transform songplays table.')
         songplays = self.__transform_songplays(log_data, song_data,
                                                json_columns=columns['songplays']['json'],
                                                table_columns=columns['songplays']['table'])
@@ -160,29 +201,52 @@ class ETLPipeline:
         }
 
     def __load(self, tables):
-        for table, data in tables.items():
-            print(f'INFO: Write {table} parquet table...')
+        silver = self.config.get('S3', 'SILVER')
 
-            file_key = f'{table.upper()}_SILVER'
-            file = f"{self.config.get('S3', 'silver')}/{self.config.get('FILES', file_key)}"
+        print(f'INFO: Write artists parquet table.')
+        tables['artists'].write.mode('overwrite') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'ARTISTS_SILVER')}")
 
-            data.write.mode('overwrite').parquet(file)
+        print(f'INFO: Write songs parquet tables.')
+        tables['songs'].write.partitionBy('artist_id').mode('overwrite') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'SONGS_BY_ARTIST_SILVER')}")
+        tables['songs'].write.partitionBy('year').mode('overwrite') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'SONGS_BY_YEAR_SILVER')}")
+
+        print(f'INFO: Write users parquet table.')
+        tables['users'].write.mode('overwrite') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'USERS_SILVER')}")
+
+        print(f'INFO: Write time parquet tables.')
+        tables['time'].write.partitionBy('month').mode('overwrite') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'TIME_BY_MONTH_SILVER')}")
+        tables['time'].write.partitionBy('year').mode('overwrite') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'TIME_BY_YEAR_SILVER')}")
+
+        print(f'INFO: Write songplays parquet tables.')
+        tables['songplays'].write.partitionBy('month').mode('overwrite') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'SONGPLAYS_BY_MONTH_SILVER')}")
+        tables['songplays'].write.partitionBy('year').mode('overwrite') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'SONGPLAYS_BY_YEAR_SILVER')}")
 
     def start(self):
         """Execute all pipeline phases and print time statistics."""
         print('-----------------------------------------------------')
-        print('AWS Redshift ETL Pipeline')
+        print('AWS EMR Spark ETL Pipeline')
         print('-----------------------------------------------------')
 
         # PHASE 1: Extract
-        print('INFO: Extracting and repartitioning data...')
+        print('INFO: Extracting and repartitioning data.')
         start = timer()
 
-        print('INFO: Extract log_data...')
+        print('INFO: Extract log_data.')
         logs = self.__extract(source=self.config.get('FILES', 'LOGS_LANDING'),
                               target=self.config.get('FILES', 'LOGS_BRONZE'))
 
-        print('INFO: Extract song_data...')
+        # filter logs after repartition
+        logs = logs.where(col('page') == 'NextSong')
+
+        print('INFO: Extract song_data.')
         songs = self.__extract(source=self.config.get('FILES', 'SONGS_LANDING'),
                                target=self.config.get('FILES', 'SONGS_BRONZE'))
 
@@ -191,7 +255,7 @@ class ETLPipeline:
 
         # PHASE 2: Transform
         print('-----------------------------------------------------')
-        print('INFO: Transforming JSON data into tables...')
+        print('INFO: Transforming JSON data into tables.')
         start = timer()
 
         tables = self.__transform(log_data=logs, song_data=songs)
@@ -201,7 +265,7 @@ class ETLPipeline:
 
         # PHASE 3: Load
         print('-----------------------------------------------------')
-        print('INFO: Loading data into parquet tables...')
+        print('INFO: Loading data into parquet tables.')
         start = timer()
 
         self.__load(tables=tables)
@@ -209,6 +273,7 @@ class ETLPipeline:
         load_time = timer() - start
         print('INFO: Load phase finished.')
 
+        total_time = extract_time + transform_time + load_time
         # STATS: print the time statistics
         print('-----------------------------------------------------')
         print('Time Statistics')
@@ -216,8 +281,10 @@ class ETLPipeline:
         print(f'Extract time: {round(extract_time, 2)} seconds')
         print(f'Transform time: {round(transform_time, 2)} seconds')
         print(f'Load time: {round(load_time, 2)} seconds')
+        print(f'Total time: {round(total_time, 2)} seconds')
 
     def stop(self):
+        """Stop the pipeline SparkContext."""
         self.spark.stop()
 
 

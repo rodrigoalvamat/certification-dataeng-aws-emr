@@ -1,0 +1,63 @@
+[
+  {
+    "Classification": "yarn-site",
+    "Properties": {
+      "yarn.nodemanager.vmem-check-enabled": "false",
+      "yarn.nodemanager.pmem-check-enabled": "false"
+    }
+  },
+  {
+    "Classification": "spark",
+    "Properties": {
+      "maximizeResourceAllocation": "true"
+    }
+  },
+  {
+    "Classification": "spark-defaults",
+    "Properties": {
+      "spark.network.timeout": "800s",
+      "spark.executor.heartbeatInterval": "60s",
+      "spark.dynamicAllocation.enabled": "true",
+      "spark.memory.fraction": "0.80",
+      "spark.memory.storageFraction": "0.30",
+      "spark.executor.extraJavaOptions": "-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'",
+      "spark.driver.extraJavaOptions": "-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'",
+      "spark.yarn.scheduler.reporterThread.maxFailures": "5",
+      "spark.storage.level": "MEMORY_AND_DISK_SER",
+      "spark.rdd.compress": "true",
+      "spark.shuffle.compress": "true",
+      "spark.shuffle.spill.compress": "true"
+    }
+  },
+  {
+    "Classification": "mapred-site",
+    "Properties": {
+      "mapreduce.map.output.compress": "true"
+    }
+  },
+  {
+    "Classification": "hadoop-env",
+    "Configurations": [
+      {
+        "Classification": "export",
+        "Configurations": [],
+        "Properties": {
+          "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+        }
+      }
+    ],
+    "Properties": {}
+  },
+  {
+    "Classification": "spark-env",
+    "Configurations": [
+      {
+        "Classification": "export",
+        "Properties": {
+          "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+        }
+      }
+    ],
+    "Properties": {}
+  }
+]

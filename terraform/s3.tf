@@ -11,24 +11,15 @@ resource "aws_s3_bucket_acl" "emr_bucket_acl" {
   acl        = "private"
 }
 
-locals {
-  all_app_files = fileset(var.s3_app_files.source, "**")
-
-  app_files = toset([
-    for app_file in local.all_app_files :
-      app_file if app_file != "__pycache__"
-  ])
-}
-
 // Uploads EMR application files
 resource "aws_s3_object" "emr_app_files" {
   depends_on = [aws_s3_bucket_acl.emr_bucket_acl]
 
   bucket   = aws_s3_bucket.emr_bucket.id
-  for_each = local.app_files
+  for_each = toset(var.s3_app_files.source)
 
-  key    = "${var.s3_app_files.target}/${each.value}"
-  source = "${var.s3_app_files.source}/${each.value}"
+  key    = "${var.s3_app_files.target}/${basename(each.value)}"
+  source = each.value
 }
 
 // Uploads EMR bootstrap script

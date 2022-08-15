@@ -1,4 +1,4 @@
-"""Defines the set of columns array for each table."""
+"""Defines the lists of columns for each table."""
 
 columns = {
     'artists': {
@@ -10,7 +10,7 @@ columns = {
         'json': ['level', 'location', 'userAgent', 'sessionId',
                  'itemInSession', 'userId', 'ts', 'song', 'artist', 'length'],
         'table': ['songplay_id', 'level', 'location', 'user_agent', 'session_id',
-                  'user_id', 'song_id', 'artist_id', 'start_time']
+                  'user_id', 'song_id', 'artist_id', 'start_time', 'year', 'month']
     },
     'songs': {
         'json': ['song_id', 'title', 'year', 'duration', 'artist_id'],

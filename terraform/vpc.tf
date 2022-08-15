@@ -13,15 +13,15 @@ module "vpc" {
   tags = merge(local.common_tags, { category = "network", resource = "vpc" })
 }
 
-resource "aws_internet_gateway" "internal_gateway" {
+resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = module.vpc.vpc_id
 
-  tags = merge(local.common_tags, { category = "network", resource = "internal-gateway" })
+  tags = merge(local.common_tags, { category = "network", resource = "internet-gateway" })
 }
 
 resource "aws_eip" "nat_eip" {
   vpc        = true
-  depends_on = [aws_internet_gateway.internal_gateway]
+  depends_on = [aws_internet_gateway.internet_gateway]
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
@@ -66,7 +66,7 @@ resource "aws_route_table" "private" {
 resource "aws_route" "public_internet_gateway" {
   route_table_id         = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.internal_gateway.id
+  gateway_id             = aws_internet_gateway.internet_gateway.id
 }
 
 resource "aws_route" "private_nat_gateway" {

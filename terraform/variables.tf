@@ -19,10 +19,10 @@ variable "project" {
 
 // Common tags
 locals {
-  namespace   = var.namespace
   common_tags = {
-    stage   = var.stage
+    namespace   = var.namespace
     project = var.project
+    stage   = var.stage
   }
 }
 
@@ -63,13 +63,13 @@ variable "private_subnets" {
 variable "emr_release" {
   description = "ERM cluster release version"
   type        = string
-  default     = "emr-5.36.0"
+  default     = "emr-6.7.0"
 }
 
 variable "emr_applications" {
   description = "ERM cluster application list"
   type        = list(string)
-  default     = ["JupyterEnterpriseGateway", "Livy", "Hadoop", "Hive", "Spark", "Zeppelin"]
+  default     = ["Spark"]
 }
 
 variable "emr_master_instance_type" {
@@ -123,10 +123,15 @@ variable "s3_data_files" {
 
 variable "s3_app_files" {
   description = "S3 EMR app files"
-  type        = map(string)
+  type        = object({ source = list(string), target = string } )
   default     = {
-    source = "../src"
-    target = "application/src"
+    source = [
+      "../src/etl/etl.py",
+      "../src/etl/etl.cfg",
+      "../src/etl/config.py",
+      "../src/etl/metadata.py"
+    ]
+    target = "application/etl"
   }
 }
 
