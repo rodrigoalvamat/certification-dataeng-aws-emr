@@ -29,19 +29,6 @@ resource "aws_s3_object" "emr_app_files" {
   source = each.value
 }
 
-/*
-// Uploads EMR data files
-resource "aws_s3_object" "emr_data_files" {
-  depends_on = [aws_s3_bucket_acl.emr_bucket_acl]
-
-  bucket   = aws_s3_bucket.emr_bucket.id
-  for_each = toset(var.s3_data_files.source)
-
-  key    = "${var.s3_data_files.target}/${basename(each.value)}"
-  source = each.value
-}
-*/
-
 // Uploads EMR bootstrap files
 resource "aws_s3_object" "emr_bootstrap_files" {
   depends_on = [aws_s3_bucket_acl.emr_bucket_acl]

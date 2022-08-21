@@ -1,8 +1,0 @@
-[
-  {
-    "Classification": "spark-defaults",
-    "Properties": {
-      "spark.sql.parquet.fs.optimized.committer.optimization-enabled": "true"
-    }
-  }
-]

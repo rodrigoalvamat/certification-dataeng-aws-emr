@@ -118,20 +118,6 @@ variable "s3_app_files" {
   }
 }
 
-/*
-variable "s3_data_files" {
-  description = "S3 EMR app files"
-  type        = object({ source = list(string), target = string } )
-  default     = {
-    source = [
-      "../data/index/log_data.txt",
-      "../data/index/song_data.txt",
-    ]
-    target = "application/data/index"
-  }
-}
-*/
-
 variable "s3_bootstrap_files" {
   description = "ERM bootstrap action script"
   type        = object({ source = list(string), target = string, args = list(string) } )

@@ -10,8 +10,8 @@ resource "local_file" "emr_cluster_dns" {
 
   content = <<EOT
 [EMR]
-DNS = ${aws_emr_cluster.cluster.master_public_dns}
-KEYPAIR = $HOME/.ssh/${var.ec2_key_pair}.pem
-CLUSTER_ID = ${aws_emr_cluster.cluster.id}
+DNS=${aws_emr_cluster.cluster.master_public_dns}
+KEYPAIR=$HOME/.ssh/${var.ec2_key_pair}.pem
+CLUSTER_ID=${aws_emr_cluster.cluster.id}
 EOT
 }

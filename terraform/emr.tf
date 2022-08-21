@@ -40,7 +40,6 @@ resource "aws_emr_cluster" "cluster" {
     args = []
   }
 
-  /*
   step {
     action_on_failure = "CONTINUE"
     name              = "S3DistCp Log Step"
@@ -56,7 +55,7 @@ resource "aws_emr_cluster" "cluster" {
         "--srcPrefixesFile",
         "s3://${var.s3_bucket}/application/data/prefix/log_data_prefix.txt",
         "--groupBy",
-        ".*\/(log_data)/.*(\\.json)"
+        ".*/(log_data)/.*(\\.json)"
       ]
     }
   }
@@ -76,7 +75,7 @@ resource "aws_emr_cluster" "cluster" {
         "--srcPrefixesFile",
         "s3://${var.s3_bucket}/application/data/prefix/song_data_prefix.txt",
         "--groupBy",
-        ".*\/(song_data)/.*(\\.json)"
+        ".*/(song_data)/.*(\\.json)"
       ]
     }
   }
@@ -96,7 +95,6 @@ resource "aws_emr_cluster" "cluster" {
       ]
     }
   }
-  */
 
   lifecycle {
     ignore_changes = [step]
