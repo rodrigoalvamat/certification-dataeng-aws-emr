@@ -72,12 +72,9 @@ class ETLPipeline:
             target: The destination folder for the JSON file.
             multiline: Flag the JSON read file format.
         """
-        data = self.spark.read.format('s3selectJson') \
-            .option('multiline', multiline).load(source).repartition(1)
-        data.write.mode('overwrite') \
-            .option('partitionOverwriteMode', 'dynamic').json(target)
-        return self.spark.read.format('s3selectJson') \
-            .option('multiline', True).load(target)
+        data = self.spark.read.json(source).repartition(1)
+        data.write.mode('overwrite').json(target)
+        return self.spark.read.json(target)
 
     def _extract(self, source, target, multiline=False):
         """Reads JSON data files from the landing zone and merges them,

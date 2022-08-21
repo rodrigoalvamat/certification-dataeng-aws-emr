@@ -1,7 +1,7 @@
-.PHONY : build clean deploy develop destroy doc
+.PHONY : build clean cluster deploy destroy doc run
 
 all:
-	develop
+	deploy
 
 clean:
 	find ./src -name '*.py[co]' -exec rm {} \;
@@ -22,5 +22,8 @@ doc:
 destroy:
 	terraform -chdir='./terraform' destroy
 
-develop: build
-	docker-compose --project-directory='./docker' up --scale spark-worker=3 -d
+cluster: build
+	docker-compose --project-directory='./docker' up --scale spark-worker=2 -d
+
+run:
+	python -m src.driver main --local

@@ -83,7 +83,7 @@ variable "emr_core_instance" {
   type        = object({ type = string, count = number } )
   default     = {
     type  = "m4.large"
-    count = 1
+    count = 2
   }
 }
 
