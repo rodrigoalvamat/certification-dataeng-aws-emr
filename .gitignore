@@ -1,6 +1,12 @@
 # jetbrains
 .idea
 
+# build
+dist
+
+# test notebooks
+notebooks
+
 # terraform
 .terraform
 terraform.tfstate
@@ -9,5 +15,5 @@ terraform.tfstate.backup
 # python 
 __pycache__
 
-# key
+# aws sensitive info
 aws.cfg

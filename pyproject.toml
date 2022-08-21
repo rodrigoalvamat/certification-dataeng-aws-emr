@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "datadiver-aws-emr"
+version = "0.1.0"
+description = "Spark ETL Pipeline on AWS EMR"
+authors = ["Rodrigo de Alvarenga Mattos <rodrigo@datadiver.dev>"]
+license = "MIT"
+packages = [
+    { include = "etl", from = "src" },
+    { include = "main.py", from = "src" },
+    { include = "__init__.py", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+pyspark = "^3.2.1"
+sphinx = "^5.1.1"
+sphinx_rtd_theme = "^1.0.0"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+extra_standard_library = ["toml"]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

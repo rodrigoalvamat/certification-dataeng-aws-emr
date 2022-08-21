@@ -20,9 +20,9 @@ variable "project" {
 // Common tags
 locals {
   common_tags = {
-    namespace   = var.namespace
-    project = var.project
-    stage   = var.stage
+    namespace = var.namespace
+    project   = var.project
+    stage     = var.stage
   }
 }
 
@@ -69,7 +69,7 @@ variable "emr_release" {
 variable "emr_applications" {
   description = "ERM cluster application list"
   type        = list(string)
-  default     = ["Spark"]
+  default     = ["Hadoop", "Spark", "Zeppelin"]
 }
 
 variable "emr_master_instance_type" {
@@ -82,17 +82,8 @@ variable "emr_core_instance" {
   description = "ERM worker EC2 instance settings"
   type        = object({ type = string, count = number } )
   default     = {
-    type  = "c4.large"
-    count = 2
-  }
-}
-
-variable "emr_roles" {
-  description = "ERM cluster roles"
-  type        = map(string)
-  default     = {
-    service = "arn:aws:iam::977290156131:role/EMR_DefaultRole",
-    instance = "EMR_EC2_DefaultRole"
+    type  = "m4.large"
+    count = 1
   }
 }
 
@@ -115,37 +106,41 @@ variable "s3_log_uri" {
   default     = "cluster/logs"
 }
 
-variable "s3_data_files" {
-  description = "S3 EMR data files"
-  type        = map(string)
-  default     = {
-    source = "../data"
-    target = "application/data"
-  }
-}
-
 variable "s3_app_files" {
   description = "S3 EMR app files"
   type        = object({ source = list(string), target = string } )
   default     = {
     source = [
-      "../src/etl/__init__.py",
-      "../src/etl/etl.py",
-      "../src/etl/etl.cfg",
-      "../src/etl/config.py",
-      "../src/etl/metadata.py"
+      "../dist/datadiver_aws_emr-0.1.0-py3-none-any.whl",
+      "../dist/driver.py"
     ]
-    target = "application/etl"
+    target = "application/dist"
   }
 }
 
-variable "emr_bootstrap" {
-  description = "ERM bootstrap action script"
-  type        = object({ key = string, name = string, args = list(string), source = string })
+/*
+variable "s3_data_files" {
+  description = "S3 EMR app files"
+  type        = object({ source = list(string), target = string } )
   default     = {
-    key    = "cluster/bootstrap/bootstrap.sh"
-    name   = "spark-bootstrap"
+    source = [
+      "../data/index/log_data.txt",
+      "../data/index/song_data.txt",
+    ]
+    target = "application/data/index"
+  }
+}
+*/
+
+variable "s3_bootstrap_files" {
+  description = "ERM bootstrap action script"
+  type        = object({ source = list(string), target = string, args = list(string) } )
+  default     = {
     args   = [],
-    source = "../bin/bootstrap.sh"
+    source = [
+      "../bin/bootstrap.sh",
+      "../bin/bootstrap-s3distcp.sh"
+    ],
+    target = "cluster/bootstrap"
   }
 }

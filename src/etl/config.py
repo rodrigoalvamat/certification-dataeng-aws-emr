@@ -4,10 +4,26 @@
 import os
 # config libs
 import configparser
+import zipfile
 
-# dwh.cfg file path
-DIR = os.path.dirname(os.path.abspath(__file__))
-INI_PATH = os.path.join(DIR, 'etl.cfg')
+SCRIPT_NAME = os.path.basename(__file__)
+"""The python script file name."""
+SCRIPT_PATH = os.path.abspath(__file__)
+"""The python script absolute file path."""
+SCRIPT_DIR = SCRIPT_PATH.replace(f'/{SCRIPT_NAME}', '')
+"""The python script directory path."""
+
+PACKAGE_DIR = 'etl'
+"""The python package name."""
+PACKAGE_PATH = SCRIPT_PATH.replace(f'/{PACKAGE_DIR}/{SCRIPT_NAME}', '')
+"""The python package path."""
+
+CONFIG_NAME = 'etl.cfg'
+"""The config file name."""
+CONFIG_EMR_PATH = SCRIPT_PATH.replace(SCRIPT_NAME, CONFIG_NAME)
+"""The config file absolute path in the AWS EMR environment."""
+CONFIG_LOCAL_PATH = os.path.join(SCRIPT_DIR, CONFIG_NAME)
+"""The config file absolute path in the local environment."""
 
 
 class Config:
@@ -23,7 +39,7 @@ class Config:
     """
 
     def __init__(self, local=False):
-        """Creates a Config object from etl.cfg file.
+        """Creates a Config object from pipeline.cfg file.
 
         Config values will be UTF-8 encoded.
 
@@ -31,8 +47,23 @@ class Config:
             local: Defines if the data will be loaded and stored locally.
         """
         self.local = local
+        self._init_parser()
+
+    def _init_parser(self):
+        """Initializes the config parser from a cfg file."""
         self.parser = configparser.ConfigParser()
-        self.parser.read_file(open(INI_PATH, encoding='utf-8'))
+
+        if self.local:
+            self.parser.read_file(open(CONFIG_LOCAL_PATH, encoding='utf-8'))
+        else:
+            self.parser.read_string(self._unzip_config())
+
+    @staticmethod
+    def _unzip_config():
+        """Reads the config cfg file from the archive package."""
+        with zipfile.ZipFile(PACKAGE_PATH, 'r') as zip_ref:
+            config = zip_ref.read(f'{PACKAGE_DIR}/{CONFIG_NAME}')
+            return config.decode('UTF-8')
 
     def get(self, section, option):
         """Reads a config option value from a section.
@@ -53,5 +84,5 @@ class Config:
             value = config.get('EMR', 'CLUSTER_ID')
         """
         if section == 'S3' and self.local:
-            return os.path.join(DIR, self.parser.get('S3_LOCAL', option))
+            return os.path.join(SCRIPT_DIR, self.parser.get('S3_LOCAL', option))
         return self.parser.get(section, option)

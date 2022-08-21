@@ -10,25 +10,43 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = merge(local.common_tags, { category = "network", resource = "vpc" })
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "vpc",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }
 
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = module.vpc.vpc_id
 
-  tags = merge(local.common_tags, { category = "network", resource = "internet-gateway" })
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "internet-gateway",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }
 
 resource "aws_eip" "nat_eip" {
   vpc        = true
   depends_on = [aws_internet_gateway.internet_gateway]
+
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "nat-eip",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = aws_eip.nat_eip.id
   subnet_id     = element(aws_subnet.public_subnet.*.id, 0)
 
-  tags = merge(local.common_tags, { category = "network", resource = "nat-gateway" })
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "nat-gateway",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }
 
 resource "aws_subnet" "public_subnet" {
@@ -38,7 +56,11 @@ resource "aws_subnet" "public_subnet" {
   availability_zone       = element(var.availability_zones, count.index)
   map_public_ip_on_launch = true
 
-  tags = merge(local.common_tags, { category = "network", resource = "public-subnet" })
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "public-subnet",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }
 
 resource "aws_subnet" "private_subnet" {
@@ -48,19 +70,31 @@ resource "aws_subnet" "private_subnet" {
   availability_zone       = element(var.availability_zones, count.index)
   map_public_ip_on_launch = false
 
-  tags = merge(local.common_tags, { category = "network", resource = "private-subnet" })
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "private-subnet",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }
 
 resource "aws_route_table" "public" {
   vpc_id = module.vpc.vpc_id
 
-  tags = merge(local.common_tags, { category = "network", resource = "public-route-table" })
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "public-route-table",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }
 
 resource "aws_route_table" "private" {
   vpc_id = module.vpc.vpc_id
 
-  tags = merge(local.common_tags, { category = "network", resource = "private-route-table" })
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "private-route-table",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }
 
 resource "aws_route" "public_internet_gateway" {
@@ -91,7 +125,7 @@ resource "aws_route_table_association" "private" {
 resource "aws_security_group" "security_group_spark" {
   description = "Allow Spark inbound traffic"
   name        = "${var.namespace}-${var.project}-${var.stage}-security-group"
-  depends_on = [module.vpc.vpc_id]
+  depends_on  = [module.vpc.vpc_id]
 
   vpc_id = module.vpc.vpc_id
 
@@ -110,5 +144,10 @@ resource "aws_security_group" "security_group_spark" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = merge(local.common_tags, { category = "network", resource = "security-group", service = "spark" })
+  tags = merge(local.common_tags, {
+    category                                 = "network",
+    resource                                 = "security-group",
+    service                                  = "spark",
+    for-use-with-amazon-emr-managed-policies = true
+  })
 }

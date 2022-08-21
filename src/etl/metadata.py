@@ -1,5 +1,4 @@
 """Defines the lists of columns for each table."""
-
 columns = {
     'artists': {
         'json': ['artist_id', 'artist_name', 'artist_location',

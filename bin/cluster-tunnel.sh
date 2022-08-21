@@ -12,7 +12,7 @@ SCRIPT_DIR="$(cd -P "$(dirname -- "${SCRIPT_PATH}")" >/dev/null 2>&1 && pwd)"
 
 # reads project config
 PROJECT_DIR="${SCRIPT_DIR}/.."
-source <(grep = "$PROJECT_DIR"/emr.cfg)
+source <(grep = "$PROJECT_DIR"/config/emr.cfg)
 
 # initializes the ssh tunnel to EMR cluster
 ssh -i "$KEYPAIR" -N -D 8157 "hadoop@$DNS"

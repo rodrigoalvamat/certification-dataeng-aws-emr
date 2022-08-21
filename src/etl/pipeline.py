@@ -3,14 +3,13 @@ the AWS S3 bucket, transform them with Spark, and load
 them back into S3 as a set of dimensional parquet tables."""
 
 # sys libs
-import argparse
 from timeit import default_timer as timer
+# data libs
+import json
 # spark libs
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, concat, concat_ws, from_unixtime, substring, to_date
 from pyspark.sql.functions import dayofmonth, dayofweek, hour, month, weekofyear, year
-# config libs
-from etl.config import Config
 # metadata libs
 from etl.metadata import columns
 
@@ -35,19 +34,32 @@ class ETLPipeline:
             config: The config adapter wrapper.
         """
         self.config = config
-        self.spark = self.__create_spark_session()
+        self.spark = self._create_spark_session()
 
-    def __create_spark_session(self):
-        """Creates the Spark session, sets the application name and
-        configure the jar dependencies packages."""
+    def _create_spark_session(self):
+        """Creates the Spark session and sets the application name."""
         spark = SparkSession.builder \
             .appName(self.config.get('SPARK', 'APP_NAME')) \
             .getOrCreate()
 
-        # .config('spark.jars.packages', self.config.get('SPARK', 'HADOOP_JAR')) \
+        if not self.config.local:
+            spark.sparkContext.setLogLevel('WARN')
+
         return spark
 
-    def __repartition(self, source, target):
+    def _read(self, source):
+        """Reads the JSON file that was merged by
+        the AWS S3DistCp on cluster bootstrap.
+
+        Args:
+            source: The origin folder of the JSON file.
+        """
+        json_data = f"{self.config.get('S3', 'BRONZE')}/{source}"
+
+        return self.spark.read.format('s3selectJson') \
+            .option('multiline', True).load(json_data)
+
+    def _repartition(self, source, target, multiline=False):
         """Reads all json files in the source folder and
         merge them into one JSON file in the target folder.
 
@@ -58,12 +70,16 @@ class ETLPipeline:
         Args:
             source: The origin folder of the json files.
             target: The destination folder for the JSON file.
+            multiline: Flag the JSON read file format.
         """
-        data = self.spark.read.json(source).repartition(1)
-        data.write.mode('overwrite').json(target)
-        return self.spark.read.json(target)
+        data = self.spark.read.format('s3selectJson') \
+            .option('multiline', multiline).load(source).repartition(1)
+        data.write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic').json(target)
+        return self.spark.read.format('s3selectJson') \
+            .option('multiline', True).load(target)
 
-    def __extract(self, source, target):
+    def _extract(self, source, target, multiline=False):
         """Reads JSON data files from the landing zone and merges them,
         by repartitioning, into a single file in the bronze layer.
 
@@ -73,10 +89,10 @@ class ETLPipeline:
         landing = f"{self.config.get('S3', 'LANDING')}/{source}"
         bronze = f"{self.config.get('S3', 'BRONZE')}/{target}"
 
-        return self.__repartition(source=landing, target=bronze)
+        return self._repartition(source=landing, target=bronze, multiline=multiline)
 
     @staticmethod
-    def __transform_table(data, json_columns, table_columns, duplicates=None):
+    def _transform_table(data, json_columns, table_columns, duplicates=None):
         """Renames all columns of a DataFrame and drop duplicate values
         for the given list of columns with duplicates.
 
@@ -92,7 +108,7 @@ class ETLPipeline:
         return data.select(json_columns).toDF(*table_columns).drop_duplicates(duplicates)
 
     @staticmethod
-    def __transform_time(data, json_columns, table_columns, duplicates=None):
+    def _transform_time(data, json_columns, table_columns, duplicates=None):
         """Transforms the unix epoch timestamp into a unique time identifier
         and add columns - hour, day, week, month, year and weekday - to the
         table DataFrame.
@@ -124,7 +140,7 @@ class ETLPipeline:
         return time
 
     @staticmethod
-    def __transform_songplays(log_data, song_data, json_columns, table_columns):
+    def _transform_songplays(log_data, song_data, json_columns, table_columns):
         """Join the log_data and song_data DataFrames and transforms
         the unix epoch timestamp into a unique time identifier that
         matches the time table.
@@ -162,35 +178,45 @@ class ETLPipeline:
         # @formatter:on
         return songplays
 
-    def __transform(self, log_data, song_data):
+    def _transform(self, log_data, song_data):
+        """Calls the transformation function for each table.
+
+        Args:
+            log_data: The DataFrame with songplays data.
+            song_data: The DataFrame with songs data.
+
+        Returns:
+            A dictionary where each key is the name of the
+            table and the value is the corresponding DataFrame.
+        """
         print('INFO: Transform artists table.')
-        artists = self.__transform_table(data=song_data,
-                                         json_columns=columns['artists']['json'],
-                                         table_columns=columns['artists']['table'],
-                                         duplicates=['artist_id'])
+        artists = self._transform_table(data=song_data,
+                                        json_columns=columns['artists']['json'],
+                                        table_columns=columns['artists']['table'],
+                                        duplicates=['artist_id'])
 
         print('INFO: Transform songs table.')
-        songs = self.__transform_table(data=song_data,
-                                       json_columns=columns['songs']['json'],
-                                       table_columns=columns['songs']['table'],
-                                       duplicates=['song_id'])
+        songs = self._transform_table(data=song_data,
+                                      json_columns=columns['songs']['json'],
+                                      table_columns=columns['songs']['table'],
+                                      duplicates=['song_id'])
 
         print('INFO: Transform users table.')
-        users = self.__transform_table(data=log_data,
-                                       json_columns=columns['users']['json'],
-                                       table_columns=columns['users']['table'],
-                                       duplicates=['user_id'])
+        users = self._transform_table(data=log_data,
+                                      json_columns=columns['users']['json'],
+                                      table_columns=columns['users']['table'],
+                                      duplicates=['user_id'])
 
         print('INFO: Transform time table.')
-        time = self.__transform_time(data=log_data,
-                                     json_columns=columns['time']['json'],
-                                     table_columns=columns['time']['table'],
-                                     duplicates=['start_time'])
+        time = self._transform_time(data=log_data,
+                                    json_columns=columns['time']['json'],
+                                    table_columns=columns['time']['table'],
+                                    duplicates=['start_time'])
 
         print('INFO: Transform songplays table.')
-        songplays = self.__transform_songplays(log_data, song_data,
-                                               json_columns=columns['songplays']['json'],
-                                               table_columns=columns['songplays']['table'])
+        songplays = self._transform_songplays(log_data, song_data,
+                                              json_columns=columns['songplays']['json'],
+                                              table_columns=columns['songplays']['table'])
 
         return {
             'artists': artists,
@@ -200,33 +226,54 @@ class ETLPipeline:
             'songplays': songplays
         }
 
-    def __load(self, tables):
+    def _load(self, tables):
+        """Writes the transformed DataFrames data to
+        the corresponding parquet tables.
+
+        Args:
+            tables: A dictionary where each key is the name of the
+                table and the value is the corresponding DataFrame.
+        """
         silver = self.config.get('S3', 'SILVER')
 
         print(f'INFO: Write artists parquet table.')
         tables['artists'].write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic') \
             .parquet(f"{silver}/{self.config.get('FILES', 'ARTISTS_SILVER')}")
 
         print(f'INFO: Write songs parquet tables.')
-        tables['songs'].write.partitionBy('artist_id').mode('overwrite') \
+        tables['songs'].write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic') \
+            .partitionBy('artist_id') \
             .parquet(f"{silver}/{self.config.get('FILES', 'SONGS_BY_ARTIST_SILVER')}")
-        tables['songs'].write.partitionBy('year').mode('overwrite') \
+        tables['songs'].write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic') \
+            .partitionBy('year') \
             .parquet(f"{silver}/{self.config.get('FILES', 'SONGS_BY_YEAR_SILVER')}")
 
         print(f'INFO: Write users parquet table.')
         tables['users'].write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic') \
             .parquet(f"{silver}/{self.config.get('FILES', 'USERS_SILVER')}")
 
         print(f'INFO: Write time parquet tables.')
-        tables['time'].write.partitionBy('month').mode('overwrite') \
+        tables['time'].write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic') \
+            .partitionBy('month') \
             .parquet(f"{silver}/{self.config.get('FILES', 'TIME_BY_MONTH_SILVER')}")
-        tables['time'].write.partitionBy('year').mode('overwrite') \
+        tables['time'].write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic') \
+            .partitionBy('year') \
             .parquet(f"{silver}/{self.config.get('FILES', 'TIME_BY_YEAR_SILVER')}")
 
         print(f'INFO: Write songplays parquet tables.')
-        tables['songplays'].write.partitionBy('month').mode('overwrite') \
+        tables['songplays'].write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic') \
+            .partitionBy('month') \
             .parquet(f"{silver}/{self.config.get('FILES', 'SONGPLAYS_BY_MONTH_SILVER')}")
-        tables['songplays'].write.partitionBy('year').mode('overwrite') \
+        tables['songplays'].write.mode('overwrite') \
+            .option('partitionOverwriteMode', 'dynamic') \
+            .partitionBy('year') \
             .parquet(f"{silver}/{self.config.get('FILES', 'SONGPLAYS_BY_YEAR_SILVER')}")
 
     def start(self):
@@ -236,19 +283,29 @@ class ETLPipeline:
         print('-----------------------------------------------------')
 
         # PHASE 1: Extract
-        print('INFO: Extracting and repartitioning data.')
+        print('INFO: Extracting data.')
         start = timer()
 
         print('INFO: Extract log_data.')
-        logs = self.__extract(source=self.config.get('FILES', 'LOGS_LANDING'),
-                              target=self.config.get('FILES', 'LOGS_BRONZE'))
+        if self.config.local:
+            source = self.config.get('FILES', 'LOGS_LANDING')
+            target = self.config.get('FILES', 'LOGS_BRONZE')
+            logs = self._extract(source=source, target=target, multiline=True)
+        else:
+            source = self.config.get('FILES', 'LOGS_BRONZE_S3')
+            logs = self._read(source=source)
 
         # filter logs after repartition
         logs = logs.where(col('page') == 'NextSong')
 
         print('INFO: Extract song_data.')
-        songs = self.__extract(source=self.config.get('FILES', 'SONGS_LANDING'),
-                               target=self.config.get('FILES', 'SONGS_BRONZE'))
+        if self.config.local:
+            source = self.config.get('FILES', 'SONGS_LANDING')
+            target = self.config.get('FILES', 'SONGS_BRONZE')
+            songs = self._extract(source=source, target=target, multiline=True)
+        else:
+            source = self.config.get('FILES', 'SONGS_BRONZE_S3')
+            songs = self._read(source=source)
 
         extract_time = timer() - start
         print('INFO: Extract phase finished.')
@@ -258,7 +315,7 @@ class ETLPipeline:
         print('INFO: Transforming JSON data into tables.')
         start = timer()
 
-        tables = self.__transform(log_data=logs, song_data=songs)
+        tables = self._transform(log_data=logs, song_data=songs)
 
         transform_time = timer() - start
         print('INFO: Transform phase finished.')
@@ -268,7 +325,7 @@ class ETLPipeline:
         print('INFO: Loading data into parquet tables.')
         start = timer()
 
-        self.__load(tables=tables)
+        self._load(tables=tables)
 
         load_time = timer() - start
         print('INFO: Load phase finished.')
@@ -283,40 +340,10 @@ class ETLPipeline:
         print(f'Load time: {round(load_time, 2)} seconds')
         print(f'Total time: {round(total_time, 2)} seconds')
 
+        print('-----------------------------------------------------')
+        print('AWS EMR ETL Pipeline Success')
+        print('-----------------------------------------------------')
+
     def stop(self):
         """Stop the pipeline SparkContext."""
         self.spark.stop()
-
-
-def main(local):
-    """The etl.py script entry point.
-    Args:
-        local: If True uses the AWS EMR and S3 configurations,
-            otherwise uses the local file system and the localhost
-            Spark session.
-    """
-    # sets the session host
-    config = Config(local=local)
-
-    # run the pipeline
-    pipeline = ETLPipeline(config)
-    pipeline.start()
-    pipeline.stop()
-
-
-if __name__ == "__main__":
-    # create the command line parser
-    parser = argparse.ArgumentParser(description='AWS EMR Spark Pipeline')
-
-    message = 'Loads data from the local file system and sets Spark session to localhost - default: ASW EMR'
-
-    # set the command line arguments
-    parser.add_argument('-l', '--local', action='store_true',
-                        help=message,
-                        default=False)
-
-    # parse the command line arguments
-    args = parser.parse_args()
-
-    # run the pipeline
-    main(args.local)

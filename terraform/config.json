@@ -1,50 +1,8 @@
 [
   {
-    "Classification": "spark-env",
-    "Properties": {},
-    "Configurations": [
-      {
-        "Classification": "export",
-        "Properties": {
-          "SPARK_HOME": "/usr/lib/spark",
-          "PYSPARK_PYTHON": "/usr/bin/python3",
-          "PYSPARK_DRIVER_PYTHON": "/usr/bin/python3"
-        }
-      }
-    ]
-  },
-  {
-    "Classification": "spark-hive-site",
-    "Properties": {
-      "hive.metastore.client.factory.class": "com.amazonaws.glue.catalog.metastore.AWSGlueDataCatalogHiveClientFactory"
-    }
-  },
-  {
     "Classification": "spark-defaults",
     "Properties": {
-      "spark.dynamicAllocation.enabled": "true",
-      "spark.shuffle.service.enabled": "true",
-      "spark.submit.deployMode": "cluster",
-      "spark.speculation": "false",
-      "spark.sql.adaptive.enabled": "true",
-      "spark.serializer": "org.apache.spark.serializer.KryoSerializer",
-      "spark.driver.extraJavaOptions": "-XX:+UseG1GC -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35 -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p'",
-      "spark.storage.level": "MEMORY_AND_DISK_SER",
-      "spark.rdd.compress": "true",
-      "spark.shuffle.compress": "true",
-      "spark.shuffle.spill.compress": "true"
-    }
-  },
-  {
-    "Classification": "spark",
-    "Properties": {
-      "maximizeResourceAllocation": "true"
-    }
-  },
-  {
-    "Classification": "emrfs-site",
-    "Properties": {
-      "fs.s3.maxConnections": "1000"
+      "spark.sql.parquet.fs.optimized.committer.optimization-enabled": "true"
     }
   }
 ]

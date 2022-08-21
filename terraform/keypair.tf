@@ -9,6 +9,12 @@ resource "aws_key_pair" "emr_key_pair" {
   key_name   = var.ec2_key_pair
   public_key = tls_private_key.emr_private_key.public_key_openssh
 
+  tags = merge(local.common_tags, {
+    category                                 = "ec2",
+    resource                                 = "keypair",
+    for-use-with-amazon-emr-managed-policies = true
+  })
+
   provisioner "local-exec" {
     command = <<EOT
 echo "${tls_private_key.emr_private_key.private_key_pem}" > ./${var.ec2_key_pair}.pem
