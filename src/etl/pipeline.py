@@ -11,7 +11,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, concat, concat_ws, from_unixtime, substring, to_date
 from pyspark.sql.functions import dayofmonth, dayofweek, hour, month, weekofyear, year
 # metadata libs
-from etl.metadata import columns
+from etl.metadata import columns, schema
 
 
 class ETLPipeline:
@@ -47,7 +47,7 @@ class ETLPipeline:
 
         return spark
 
-    def _read(self, source):
+    def _read(self, source, schema):
         """Reads the JSON file that was merged by
         the AWS S3DistCp on cluster bootstrap.
 
@@ -57,9 +57,9 @@ class ETLPipeline:
         json_data = f"{self.config.get('S3', 'BRONZE')}/{source}"
 
         return self.spark.read.format('s3selectJson') \
-            .option('multiline', True).load(json_data)
+            .option('multiline', True).load(json_data, schema=schema)
 
-    def _repartition(self, source, target, multiline=False):
+    def _repartition(self, source, target, schema, multiline=False):
         """Reads all json files in the source folder and
         merge them into one JSON file in the target folder.
 
@@ -72,11 +72,11 @@ class ETLPipeline:
             target: The destination folder for the JSON file.
             multiline: Flag the JSON read file format.
         """
-        data = self.spark.read.json(source).repartition(1)
+        data = self.spark.read.json(source, schema=schema).repartition(1)
         data.write.mode('overwrite').json(target)
         return self.spark.read.json(target)
 
-    def _extract(self, source, target, multiline=False):
+    def _extract(self, source, target, schema, multiline=False):
         """Reads JSON data files from the landing zone and merges them,
         by repartitioning, into a single file in the bronze layer.
 
@@ -86,7 +86,8 @@ class ETLPipeline:
         landing = f"{self.config.get('S3', 'LANDING')}/{source}"
         bronze = f"{self.config.get('S3', 'BRONZE')}/{target}"
 
-        return self._repartition(source=landing, target=bronze, multiline=multiline)
+        return self._repartition(source=landing, target=bronze,
+                                 schema=schema, multiline=multiline)
 
     @staticmethod
     def _transform_table(data, json_columns, table_columns, duplicates=None):
@@ -238,40 +239,28 @@ class ETLPipeline:
             .option('partitionOverwriteMode', 'dynamic') \
             .parquet(f"{silver}/{self.config.get('FILES', 'ARTISTS_SILVER')}")
 
-        print(f'INFO: Write songs parquet tables.')
+        print(f'INFO: Write songs parquet table.')
         tables['songs'].write.mode('overwrite') \
             .option('partitionOverwriteMode', 'dynamic') \
-            .partitionBy('artist_id') \
-            .parquet(f"{silver}/{self.config.get('FILES', 'SONGS_BY_ARTIST_SILVER')}")
-        tables['songs'].write.mode('overwrite') \
-            .option('partitionOverwriteMode', 'dynamic') \
-            .partitionBy('year') \
-            .parquet(f"{silver}/{self.config.get('FILES', 'SONGS_BY_YEAR_SILVER')}")
+            .partitionBy('year', 'artist_id') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'SONGS_SILVER')}")
 
         print(f'INFO: Write users parquet table.')
         tables['users'].write.mode('overwrite') \
             .option('partitionOverwriteMode', 'dynamic') \
             .parquet(f"{silver}/{self.config.get('FILES', 'USERS_SILVER')}")
 
-        print(f'INFO: Write time parquet tables.')
+        print(f'INFO: Write time parquet table.')
         tables['time'].write.mode('overwrite') \
             .option('partitionOverwriteMode', 'dynamic') \
-            .partitionBy('month') \
-            .parquet(f"{silver}/{self.config.get('FILES', 'TIME_BY_MONTH_SILVER')}")
-        tables['time'].write.mode('overwrite') \
-            .option('partitionOverwriteMode', 'dynamic') \
-            .partitionBy('year') \
-            .parquet(f"{silver}/{self.config.get('FILES', 'TIME_BY_YEAR_SILVER')}")
+            .partitionBy('year', 'month') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'TIME_SILVER')}")
 
-        print(f'INFO: Write songplays parquet tables.')
+        print(f'INFO: Write songplays parquet table.')
         tables['songplays'].write.mode('overwrite') \
             .option('partitionOverwriteMode', 'dynamic') \
-            .partitionBy('month') \
-            .parquet(f"{silver}/{self.config.get('FILES', 'SONGPLAYS_BY_MONTH_SILVER')}")
-        tables['songplays'].write.mode('overwrite') \
-            .option('partitionOverwriteMode', 'dynamic') \
-            .partitionBy('year') \
-            .parquet(f"{silver}/{self.config.get('FILES', 'SONGPLAYS_BY_YEAR_SILVER')}")
+            .partitionBy('year', 'month') \
+            .parquet(f"{silver}/{self.config.get('FILES', 'SONGPLAYS_SILVER')}")
 
     def start(self):
         """Execute all pipeline phases and print time statistics."""
@@ -287,10 +276,11 @@ class ETLPipeline:
         if self.config.local:
             source = self.config.get('FILES', 'LOGS_LANDING')
             target = self.config.get('FILES', 'LOGS_BRONZE')
-            logs = self._extract(source=source, target=target, multiline=True)
+            logs = self._extract(source=source, target=target,
+                                 schema=schema['logs'], multiline=True)
         else:
             source = self.config.get('FILES', 'LOGS_BRONZE_S3')
-            logs = self._read(source=source)
+            logs = self._read(source=source, schema=schema['logs'])
 
         # filter logs after repartition
         logs = logs.where(col('page') == 'NextSong')
@@ -299,10 +289,11 @@ class ETLPipeline:
         if self.config.local:
             source = self.config.get('FILES', 'SONGS_LANDING')
             target = self.config.get('FILES', 'SONGS_BRONZE')
-            songs = self._extract(source=source, target=target, multiline=True)
+            songs = self._extract(source=source, target=target,
+                                  schema=schema['songs'], multiline=True)
         else:
             source = self.config.get('FILES', 'SONGS_BRONZE_S3')
-            songs = self._read(source=source)
+            songs = self._read(source=source, schema=schema['songs'])
 
         extract_time = timer() - start
         print('INFO: Extract phase finished.')

@@ -102,7 +102,7 @@ If you want to test the project locally, please check if you have an updated ver
 
 ```bash
 # call docker composer to start a local cluster
-make cluster
+make docker-composer
 # execute the python script pipeline
 make run
 ```
@@ -129,48 +129,36 @@ The figure below shows the raw JSON file structure and the merging process by th
 <img src='./docs/images/s3distcp.jpg' alt='AWS EMR S3DistCp Merge'/>
 </div>
 
-
-
 ## S3DistCp and the Small Files Problem
 
-The S3DistCp tool is recommended, by the AWS big data team, as a best practice for optimizing S3 data access by EMR and Glue. Unfortunately, the documentation does not provide all the information clearly, in one place. However, the end result delivers better performance and greater scalability when compared to the options:
-
-
+The S3DistCp tool is recommended, by the AWS big data team, as a best practice for optimizing S3 data access by EMR and Glue. Unfortunately, the documentation does not provide all the information clearly, in one place. However, the end result delivers better performance and greater scalability when compared to the following options:
 
 1. **Process Small Files:** Generates metadata overload, query performance degradation, skewed task loading, and name node overhead.
 
 2. **Coalesce or Repartition:** They are not optimized to satisfy S3 performance requirements. [According to this article](https://aws.amazon.com/blogs/big-data/best-practices-to-optimize-data-access-performance-from-amazon-emr-and-aws-glue-to-amazon-s3), the best performance occurs when the write and read operations are distributed by prefix (directory) and not by bucket.
 
-
-
 Therefore, we will describe each step needed to copy and merge small files on S3 using S3DistCp in the following table:
 
 | Entry Point   | Task                         | Outcome                                                                |
 | ------------- | ---------------------------- | ---------------------------------------------------------------------- |
-| bootstrap.sh  | aws s3 ls <path> --recursive | List of S3 objects stored  in local txt files                          |
+| bootstrap.sh  | aws s3 ls <path> --recursive | Store a list of S3 objects  in local txt files                         |
 | bootstrap.sh  | sed -ir <regexp>             | Clean txt files resulting in a list of directory prefixes              |
 | bootstrap.sh  | awk                          | Remove duplicate prefixes                                              |
 | bootstrap.sh  | aws s3 cp                    | Copy local txt prefixes files do S3                                    |
 | step function | s3-dist-cp                   | Copy files using the --srcPrefixesFile argument do distribute the load |
 | step function | s3-dist-cp                   | Merge files using the --groupBy <regexp> criteria                      |
 
-
-
-Take a look at the source code of the [bootstrap.sh](./bin/bootstrap.sh) shell script and the terraform [emr.tf](./terraform/emr.tf) resources declaration to undertand the details of each task.
-
-
+Take a look at the source code of the [bootstrap.sh](./bin/bootstrap.sh) shell script and the terraform [emr.tf](./terraform/emr.tf) resources declaration to understand the details of each task.
 
 1. [S3DistCp Documentation](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/UsingEMR_s3distcp.html)
 
 2. [7 Tips for Using S3DistCp](https://aws.amazon.com/blogs/big-data/seven-tips-for-using-s3distcp-on-amazon-emr-to-move-data-efficiently-between-hdfs-and-amazon-s3/)
 
-
-
 ## Utils
 
-There are some scripts in the bin directory to make it easier to troubleshoot and monitor the cluster while it is running. 
+There are some scripts in the [bin](./bin) directory to make it easier to troubleshoot and monitor the cluster while it is running. 
 
-**NOTE:** All scripts depend on the successful execution of the `make deploy`  when terraform automatically generates the `cluster-key.pem` and `emr.cfg` files with DNS and ClusterID information.
+**NOTE:** All scripts depend on the successful execution of the `make deploy`  when terraform automatically generates the `$HOME/.ssh/cluster-key.pem` and `./config/emr.cfg` files with DNS and ClusterID information.
 
 | Script                    | Descripton                                                                                                                                   |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -180,8 +168,6 @@ There are some scripts in the bin directory to make it easier to troubleshoot an
 | ./bin/submit.sh           | SSH call to the spark-submit with the project package on dist                                                                                |
 | ./bin/cluster-tunnel.sh   | Uses dynamic port forwarding to access master node on[ http://localhost:8157](http://localhost:8157)                                         |
 | ./bin/zeppelin-tunnel.sh  | Uses dynamic port forwarding to access the Zeppelin notebook server and run Spark iteratively[ http://localhost:8157](http://localhost:8157) |
-
-
 
 ## Destroy the Cluster
 
