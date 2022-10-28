@@ -28,7 +28,7 @@ poetry install
 
 ## Auto-generate API Documentation
 
-The [Sphinx](https://www.sphinx-doc.org) documentation generator was used to build the [HTML docs](https://htmlpreview.github.io/?https://github.com/rodrigoalvamat/datadiver-aws-emr/blob/main/docs/build/html/index.html) from the source code ```DOCSTRIGS```.
+The [Sphinx](https://www.sphinx-doc.org) documentation generator was used to build the [HTML docs](https://htmlpreview.github.io/?https://github.com/rodrigoalvamat/certification-dataeng-aws-emr/blob/main/docs/build/html/index.html) from the source code ```DOCSTRIGS```.
 
 ## AWS Services and Resources
 
